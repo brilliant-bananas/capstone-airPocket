@@ -1,19 +1,208 @@
 'use strict'
-
+const {green, red} = require('chalk')
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Category, Budget, Transaction} = require('../server/db/models')
+
+const users = [
+  {
+    firstName: 'Jessica',
+    lastName: 'Cotrina',
+    email: 'jessi@gmail.com',
+    password: '1234'
+  },
+  {
+    firstName: 'Cathy',
+    lastName: 'Sun',
+    email: 'cathy@gmail.com',
+    password: '1234'
+  },
+  {
+    firstName: 'Torrel',
+    lastName: 'Jeremiah',
+    email: 'torrel@gmail.com',
+    password: '1234'
+  },
+  {
+    firstName: 'Yuliya',
+    lastName: 'Maroz',
+    email: 'yuliya@gmail.com',
+    password: '1234'
+  }
+]
+
+const categories = [
+  {
+    name: 'Groceries',
+    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/2921/2921829.svg'
+  },
+  {
+    name: 'Mortage',
+    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/1040/1040988.svg'
+  },
+  {
+    name: 'Food & Dining',
+    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/1999/1999067.svg'
+  },
+  {
+    name: 'Home',
+    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/2829/2829733.svg'
+  },
+  {
+    name: 'Utilities',
+    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/270/270644.svg'
+  },
+  {
+    name: 'Entertainment',
+    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/3163/3163508.svg'
+  }
+]
+
+const budgets = [
+  {
+    total: 300,
+    remaining: 80,
+    period: 'monthly',
+    userId: 1,
+    categoryId: 1
+  },
+  {
+    total: 1000,
+    remaining: 960,
+    period: 'annual',
+    userId: 1,
+    categoryId: 2
+  },
+  {
+    total: 470,
+    remaining: 170,
+    period: 'annual',
+    userId: 2,
+    categoryId: 1
+  },
+  {
+    total: 1800,
+    remaining: 1000,
+    period: 'annual',
+    userId: 1,
+    categoryId: 6
+  },
+  {
+    total: 80,
+    remaining: 19,
+    period: 'monthly',
+    userId: 2,
+    categoryId: 5
+  }
+]
+
+const transactions = [
+  {
+    amount: 50,
+    storeName: 'wallmart',
+    userId: 1,
+    categoryId: 1
+  },
+  {
+    amount: 50,
+    storeName: 'New York restaurant',
+    userId: 2,
+    categoryId: 2
+  },
+  {
+    amount: 100,
+    storeName: 'target',
+    userId: 1,
+    categoryId: 1
+  },
+  {
+    amount: 200,
+    storeName: 'homedepot',
+    userId: 1,
+    categoryId: 1
+  },
+  {
+    amount: 200,
+    storeName: 'staples',
+    userId: 1,
+    categoryId: 1
+  },
+  {
+    amount: 200,
+    storeName: 'BP Gas',
+    userId: 1,
+    categoryId: 2
+  },
+  {
+    amount: 50,
+    storeName: 'wallmart',
+    userId: 1,
+    categoryId: 2
+  },
+  {
+    amount: 50,
+    storeName: 'wallmart',
+    userId: 1,
+    categoryId: 2
+  },
+  {
+    amount: 50,
+    storeName: 'wallmart',
+    userId: 1,
+    categoryId: 2
+  },
+  {
+    amount: 50,
+    storeName: 'wallmart',
+    userId: 1,
+    categoryId: 2
+  },
+  {
+    amount: 50,
+    storeName: 'wallmart',
+    userId: 1,
+    categoryId: 2
+  },
+  {
+    amount: 50,
+    storeName: 'wallmart',
+    userId: 1,
+    categoryId: 2
+  }
+]
 
 async function seed() {
-  await db.sync({force: true})
-  console.log('db synced!')
+  try {
+    await db.sync({force: true})
+    console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+    await Promise.all(
+      users.map(user => {
+        return User.create(user)
+      })
+    )
 
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
+    await Promise.all(
+      categories.map(category => {
+        return Category.create(category)
+      })
+    )
+
+    await Promise.all(
+      budgets.map(budget => {
+        return Budget.create(budget)
+      })
+    )
+
+    await Promise.all(
+      transactions.map(transaction => {
+        return Transaction.create(transaction)
+      })
+    )
+
+    console.log(green(`seeded successfully`))
+  } catch (err) {
+    console.log(red(err))
+  }
 }
 
 // We've separated the `seed` function from the `runSeed` function.
@@ -28,8 +217,6 @@ async function runSeed() {
     process.exitCode = 1
   } finally {
     console.log('closing db connection')
-    await db.close()
-    console.log('db connection closed')
   }
 }
 
