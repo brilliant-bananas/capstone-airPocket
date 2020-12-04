@@ -5,18 +5,14 @@ module.exports = router
 // GET: transactions/
 router.get('/', async (req, res, next) => {
   try {
-    const transactions = await Transaction.findAll()
+    const userId = req.user.id
+    console.log('req.user--->', req.user)
+    const transactions = await Transaction.findAll({
+      where: {
+        userId: userId
+      }
+    })
     res.json(transactions)
-  } catch (error) {
-    next(error)
-  }
-})
-
-// POST: transactions/
-router.post('/', async (req, res, next) => {
-  try {
-    const newTransaction = await Transaction.create(req.body)
-    res.json(newTransaction)
   } catch (error) {
     next(error)
   }
