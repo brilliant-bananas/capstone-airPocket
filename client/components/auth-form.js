@@ -19,33 +19,6 @@ import {auth} from '../store'
 /**
  * COMPONENT
  */
-// const AuthForm = props => {
-//   const {name, displayName, handleSubmit, error} = props
-
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit} name={name}>
-//         <div>
-//           <label htmlFor="email">
-//             <small>Email</small>
-//           </label>
-//           <input name="email" type="text" />
-//         </div>
-//         <div>
-//           <label htmlFor="password">
-//             <small>Password</small>
-//           </label>
-//           <input name="password" type="password" />
-//         </div>
-//         <div>
-//           <button type="submit">{displayName}</button>
-//         </div>
-//         {error && error.response && <div> {error.response.data} </div>}
-//       </form>
-//       <a href="/auth/google">{displayName} with Google</a>
-//     </div>
-//   )
-// }
 
 function Copyright() {
   return (
@@ -155,102 +128,6 @@ const LogInForm = props => {
     </Container>
   )
 }
-
-// const SignUpForm = (props) => {
-//   const classes = useStyles();
-//   const {name, displayName, handleSubmit, error} = props
-//   return (
-//     <Container component="main" maxWidth="xs">
-//       <CssBaseline />
-//       <div className={classes.paper}>
-//         <Avatar className={classes.avatar}>
-//           <LockOutlinedIcon />
-//         </Avatar>
-//         <Typography component="h1" variant="h5">
-//           Sign Up
-//         </Typography>
-//         <form
-//            onSubmit={handleSubmit}
-//            className={classes.form}
-//            name={name}
-//            noValidate>
-//           <TextField
-//             variant="outlined"
-//             margin="normal"
-//             required
-//             fullWidth
-//             name="firstName"
-//             id="firstName"
-//             label="First Name"
-//             type="firstName"
-//             autoComplete="firstName"
-//             autoFocus
-//           />
-//           <TextField
-//             variant="outlined"
-//             margin="normal"
-//             required
-//             fullWidth
-//             name="LastName"
-//             label="Last Name"
-//             type="lastName"
-//             id="lastName"
-//             autoComplete="LastName"
-//           />
-//           <TextField
-//             variant="outlined"
-//             margin="normal"
-//             required
-//             fullWidth
-//             id="email"
-//             label="Email Address"
-//             name="email"
-//             autoComplete="email"
-//           />
-//           <TextField
-//             variant="outlined"
-//             margin="normal"
-//             required
-//             fullWidth
-//             name="password"
-//             label="Password"
-//             type="password"
-//             id="password"
-//             autoComplete="current-password"
-//           />
-//           <FormControlLabel
-//             control={<Checkbox value="remember" color="primary" />}
-//             label="Remember me"
-//           />
-//           <Button
-//             type="submit"
-//             fullWidth
-//             variant="contained"
-//             color="primary"
-//             className={classes.submit}
-//           >
-//             {displayName}
-//           </Button>
-//           {/* <Grid container>
-//             <Grid item xs>
-//               <Link href="#" variant="body2">
-//                 Forgot password?
-//               </Link>
-//             </Grid>
-//             <Grid item>
-//               <Link href="#" variant="body2">
-//                 "Don't have an account? Sign Up"
-//               </Link>
-//             </Grid>
-//           </Grid> */}
-//         </form>
-//       </div>
-//       <Box mt={8}>
-//         <Copyright />
-//       </Box>
-//     </Container>
-//   );
-// }
 
 const SignUpForm = props => {
   const classes = useStyles()
