@@ -1,5 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
+  margin: 0;
   font-family: sans-serif;
+  color: #926239;
+  line-height: 1.6;
 }
 
 a {
@@ -28,6 +36,23 @@ form div {
   top: -20px;
   left: calc(50% - 50px);
 }
+
+.homepage-image {
+  background-image: url(./icons/home.png);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  padding: 0 20px;
+}
+
+.homepage-image h1 {
+  font-size: 50px;
+}
+
 /* body {
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;

@@ -1,9 +1,11 @@
 import React from 'react'
 
-export const HomePage = () => {
+function HomePage() {
   return (
-    <div>
+    <div className="homepage-image">
       <h1>Welcome to Air Pocket</h1>
     </div>
   )
 }
+
+export default HomePage

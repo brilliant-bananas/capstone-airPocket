@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-const logo = require('../../public/icons/wallet.png')
+// import test from 'wallet.png'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
@@ -21,7 +21,10 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/">airPocket</Link>
+          <Link to="/">
+            {/* <img src={test} /> */}
+            <img src="/icons/wallet.png" width="50" height="50" />
+          </Link>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
         </div>
