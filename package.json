@@ -102,6 +102,8 @@
     "supertest": "^4.0.2",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
-    "yaml": "^1.10.0"
+    "yaml": "^1.10.0",
+    "tesseract.js": "^2.0.0-beta.1",
+    "tesseract.js-core": "^2.0.0-beta.13"
   }
 }
