@@ -6,6 +6,9 @@ import {Login, Signup, UserHome} from './components'
 import HomePage from './components/home-page'
 import {me} from './store'
 import Camera from './components/camera'
+import AllTransactions from './components/allTransactions'
+import Categories from './components/categories'
+
 /**
  * COMPONENT
  */
@@ -28,6 +31,8 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
             <Route path="/camera" component={Camera} />
+            <Route path="/transactions" component={AllTransactions} />
+            <Route path="/categories" component={Categories} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
