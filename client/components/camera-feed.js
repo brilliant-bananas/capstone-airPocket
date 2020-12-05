@@ -1,6 +1,24 @@
 import React, {Component} from 'react'
 
 export default class CameraFeed extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      file: null
+    }
+    this.onFormSubmit = this.onFormSubmit.bind(this)
+    this.onChange = this.onChange.bind(this)
+  }
+
+  // uploading photo
+  onFormSubmit(e) {
+    e.preventDefault()
+    this.props.uploadImageFromForm(this.state.file)
+  }
+  onChange(e) {
+    this.setState({file: e.target.files[0]})
+  }
+
   /**
    * Processes available devices and identifies one by the label
    * @memberof CameraFeed
@@ -45,10 +63,10 @@ export default class CameraFeed extends Component {
    * @instance
    */
   takePhoto = () => {
-    const {sendFile} = this.props
     const context = this.canvas.getContext('2d')
+    //getImagen from canvas
     context.drawImage(this.videoPlayer, 0, 0, 680, 360)
-    this.canvas.toBlob(sendFile)
+    this.canvas.toBlob(this.props.uploadImageFromCamera)
   }
 
   render() {
@@ -63,8 +81,19 @@ export default class CameraFeed extends Component {
         </div>
         <button onClick={this.takePhoto}>Take photo!</button>
         <div className="c-camera-feed__stage">
-          <canvas width="680" height="360" ref={ref => (this.canvas = ref)} />
+          <canvas
+            id="image"
+            width="680"
+            height="360"
+            ref={ref => (this.canvas = ref)}
+          />
         </div>
+        {/* <button onClick={this.uploadPhoto}>Upload photo!</button> */}
+        <form onSubmit={this.onFormSubmit}>
+          <h1>File Upload</h1>
+          <input type="file" name="myImage" onChange={this.onChange} />
+          <button type="submit">Upload</button>
+        </form>
       </div>
     )
   }
