@@ -5,13 +5,15 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import camera from './camera'
 import transaction from './transaction'
+import singleTransaction from './singleTransaction'
 import categories from './categories'
 
 const reducer = combineReducers({
   user: user,
   transactions: transaction,
   categories: categories,
-  camera: camera
+  camera: camera,
+  singleTransaction: singleTransaction,
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

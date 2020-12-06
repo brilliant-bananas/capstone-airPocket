@@ -8,53 +8,53 @@ const users = [
     firstName: 'Jessica',
     lastName: 'Cotrina',
     email: 'jessi@gmail.com',
-    password: '1234'
+    password: '1234',
   },
   {
     firstName: 'Cathy',
     lastName: 'Sun',
     email: 'cathy@gmail.com',
-    password: '1234'
+    password: '1234',
   },
   {
     firstName: 'Torrel',
     lastName: 'Jeremiah',
     email: 'torrel@gmail.com',
-    password: '1234'
+    password: '1234',
   },
   {
     firstName: 'Yuliya',
     lastName: 'Maroz',
     email: 'yuliya@gmail.com',
-    password: '1234'
-  }
+    password: '1234',
+  },
 ]
 
 const categories = [
   {
     name: 'Groceries',
-    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/2921/2921829.svg'
+    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/2921/2921829.svg',
   },
   {
     name: 'Mortage',
-    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/1040/1040988.svg'
+    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/1040/1040988.svg',
   },
   {
     name: 'Food & Dining',
-    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/1999/1999067.svg'
+    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/1999/1999067.svg',
   },
   {
     name: 'Home',
-    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/2829/2829733.svg'
+    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/2829/2829733.svg',
   },
   {
     name: 'Utilities',
-    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/270/270644.svg'
+    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/270/270644.svg',
   },
   {
     name: 'Entertainment',
-    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/3163/3163508.svg'
-  }
+    imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/3163/3163508.svg',
+  },
 ]
 
 const budgets = [
@@ -63,111 +63,123 @@ const budgets = [
     remaining: 80,
     period: 'monthly',
     userId: 1,
-    categoryId: 1
+    categoryId: 1,
   },
   {
     total: 1000,
     remaining: 960,
     period: 'annual',
     userId: 1,
-    categoryId: 2
+    categoryId: 2,
   },
   {
     total: 470,
     remaining: 170,
     period: 'annual',
     userId: 2,
-    categoryId: 1
+    categoryId: 1,
   },
   {
     total: 1800,
     remaining: 1000,
     period: 'annual',
     userId: 1,
-    categoryId: 6
+    categoryId: 6,
   },
   {
     total: 80,
     remaining: 19,
     period: 'monthly',
     userId: 2,
-    categoryId: 5
-  }
+    categoryId: 5,
+  },
 ]
 
 const transactions = [
   {
     amount: 50,
-    storeName: 'wallmart',
+    storeName: 'WalMart',
+    date: '2020-10-10',
     userId: 1,
-    categoryId: 1
+    categoryId: 1,
   },
   {
     amount: 50,
     storeName: 'New York restaurant',
+    date: '2020-10-15',
     userId: 2,
-    categoryId: 2
+    categoryId: 2,
   },
   {
     amount: 100,
-    storeName: 'target',
+    storeName: 'Target',
+    date: '2020-10-17',
     userId: 1,
-    categoryId: 1
+    categoryId: 1,
   },
   {
     amount: 200,
     storeName: 'homedepot',
+    date: '2020-10-22',
     userId: 1,
-    categoryId: 1
+    categoryId: 1,
   },
   {
     amount: 200,
     storeName: 'staples',
+    date: '2020-10-22',
     userId: 1,
-    categoryId: 1
+    categoryId: 1,
   },
   {
-    amount: 200,
+    amount: 66,
     storeName: 'BP Gas',
+    date: '2020-10-23',
     userId: 1,
-    categoryId: 2
+    categoryId: 2,
   },
   {
     amount: 50,
-    storeName: 'wallmart',
+    storeName: 'WalMart',
+    date: '2020-10-28',
     userId: 1,
-    categoryId: 2
+    categoryId: 2,
   },
   {
     amount: 50,
-    storeName: 'wallmart',
+    storeName: 'WalMart',
+    date: '2020-10-29',
     userId: 1,
-    categoryId: 2
+    categoryId: 2,
   },
   {
     amount: 50,
-    storeName: 'wallmart',
+    storeName: 'WalMart',
+    date: '2020-11-02',
     userId: 1,
-    categoryId: 2
+    categoryId: 2,
   },
   {
     amount: 50,
-    storeName: 'wallmart',
+    storeName: 'WalMart',
+    date: '2020-11-05',
     userId: 1,
-    categoryId: 2
+    categoryId: 2,
   },
   {
     amount: 50,
-    storeName: 'wallmart',
+    storeName: 'WalMart',
+    date: '2020-11-15',
     userId: 1,
-    categoryId: 2
+    categoryId: 2,
   },
   {
     amount: 50,
-    storeName: 'wallmart',
+    storeName: 'WalMart',
+    date: '2020-11-20',
     userId: 1,
-    categoryId: 2
-  }
+    categoryId: 2,
+  },
 ]
 
 async function seed() {
@@ -176,25 +188,25 @@ async function seed() {
     console.log('db synced!')
 
     await Promise.all(
-      users.map(user => {
+      users.map((user) => {
         return User.create(user)
       })
     )
 
     await Promise.all(
-      categories.map(category => {
+      categories.map((category) => {
         return Category.create(category)
       })
     )
 
     await Promise.all(
-      budgets.map(budget => {
+      budgets.map((budget) => {
         return Budget.create(budget)
       })
     )
 
     await Promise.all(
-      transactions.map(transaction => {
+      transactions.map((transaction) => {
         return Transaction.create(transaction)
       })
     )

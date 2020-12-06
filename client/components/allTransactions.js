@@ -2,6 +2,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchTransactions} from '../store/transaction'
 import SingleTransaction from './singleTransaction'
+import {
+  updateOneTransaction,
+  deleteOneTransaction,
+} from '../store/singleTransaction'
 
 class Transactions extends React.Component {
   constructor(props) {
@@ -20,15 +24,14 @@ class Transactions extends React.Component {
         <div className="items">
           <h1 className="center">All Transactions:</h1>
           <ol className="allTransactions">
-            {transactions.map(transaction => (
+            {transactions.map((transaction) => (
               <SingleTransaction
                 transaction={transaction}
                 key={transaction.id}
                 userId={userId}
-                // updateTransaction={this.props.updateProduct}
-                // addTransaction={this.props.addCartProduct}
-                // deleteTransaction={this.props.deleteProduct}
-                // getTransactions={this.props.getTransactions}
+                getTransactins={this.props.getTransactins}
+                updateTransaction={this.props.updateTransaction}
+                deleteTransaction={this.props.deleteTransaction}
               />
             ))}
           </ol>
@@ -38,16 +41,16 @@ class Transactions extends React.Component {
   }
 }
 
-const mapState = state => ({
+const mapState = (state) => ({
   transactions: state.transactions,
-  userId: state.user.id
+  userId: state.user.id,
 })
 
-const mapDispatch = dispatch => ({
-  getTransactions: () => dispatch(fetchTransactions())
-  //   updateTransaction: () => updateOneTransaction(),
-  //   deleteTransaction: (id) => deleteOneTransaction(id),
-  //   addNewTransaction: (product) => addNewTransaction(product),
+const mapDispatch = (dispatch) => ({
+  getTransactions: () => dispatch(fetchTransactions()),
+  updateTransaction: (id, transactionInfo) =>
+    dispatch(updateOneTransaction(id, transactionInfo)),
+  deleteTransaction: (id) => dispatch(deleteOneTransaction(id)),
 })
 
 const AllTransactions = connect(mapState, mapDispatch)(Transactions)

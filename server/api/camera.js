@@ -10,17 +10,15 @@ const upload = multer()
 
 //OCR
 const {createWorker} = require('tesseract.js')
+const User = require('../db/models/user')
 
 // Function for create file static with filename and content.
-const saveFile = async file => {
+const saveFile = async (file) => {
   new Promise((resolve, reject) =>
-    fs.writeFile(
-      './public/uploads/receipt.png',
-      file.buffer,
-      err =>
-        err
-          ? reject('An error occurred: ' + err.message)
-          : resolve({uploaded: true})
+    fs.writeFile('./public/uploads/receipt.png', file.buffer, (err) =>
+      err
+        ? reject('An error occurred: ' + err.message)
+        : resolve({uploaded: true})
     )
   )
 }
@@ -36,15 +34,15 @@ router.post('/upload', upload.single('photo'), async (req, res, next) => {
 
     const worker = createWorker({
       langPath: path.join('./server', 'lang-data'),
-      logger: m => console.log(m)
+      logger: (m) => console.log(m),
     })
     ;(async () => {
       await worker.load()
       await worker.loadLanguage('eng')
       await worker.initialize('eng')
-      const {data: {text}} = await worker.recognize(
-        path.join('./public/uploads', 'receipt.png')
-      )
+      const {
+        data: {text},
+      } = await worker.recognize(path.join('./public/uploads', 'receipt.png'))
 
       //getting total and name of the place
       const data = `${text}`
@@ -62,21 +60,21 @@ router.post('/upload', upload.single('photo'), async (req, res, next) => {
         storeName = splitData[0]
       }
 
-      const total = splitData.find(element => /tot?al/i.test(element))
+      const total = splitData.find((element) => /tot?al/i.test(element))
 
       let amount = 0
       if (total) {
         const totalData = total.split(' ')
         if (totalData) {
           const price = totalData.find(
-            element => element[0] === '$' || element[0] === 's'
+            (element) => element[0] === '$' || element[0] === 's'
           )
           if (price) {
             amount = Number(price.slice(1))
           } else {
             amount = Number(
               totalData.find(
-                element =>
+                (element) =>
                   isNaN(Number(element)) === false && Number(element) !== 0
               )
             )
@@ -87,13 +85,15 @@ router.post('/upload', upload.single('photo'), async (req, res, next) => {
       }
 
       await worker.terminate()
-
+      const userId = req.user.id
       if (storeName !== '' && amount > 0) {
         console.log('Store name:', storeName)
         console.log('amount', amount)
+        console.log('userId-->', userId)
         const newTransaction = await Transaction.create({
           amount,
-          storeName
+          storeName,
+          userId: userId,
         })
         res.send(newTransaction)
       } else {
