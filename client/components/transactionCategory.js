@@ -31,15 +31,14 @@ class TransCategories extends React.Component {
   }
 
   render() {
-    console.log('selectedId-->', this.state.selectedId)
-    console.log('transactionId state-->', this.props.id)
-
+    // console.log('selectedId-->', this.state.selectedId)
+    // console.log('transactionId state-->', this.props.id)
     return (
       <div id="categories">
         <select
           className="btn btn-primary"
           onChange={this.handleChange}
-          value={this.state.categoryId}
+          value={this.state.categoryId || ''}
         >
           <option value="">Select Category</option>
           {this.props.categories.map((category) => (

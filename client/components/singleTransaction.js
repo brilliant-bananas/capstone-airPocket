@@ -1,55 +1,43 @@
 import React from 'react'
 import TransCategories from './transactionCategory'
 import TransForm from './transactionForm'
+import {connect} from 'react-redux'
+import {
+  updateOneTransaction,
+  deleteOneTransaction,
+} from '../store/singleTransaction'
 
-export class SingleTransaction extends React.Component {
+class SingleTransaction extends React.Component {
   constructor(props) {
     super(props)
-    const {transaction} = this.props
     this.state = {
-      id: transaction.id,
-      amount: transaction.amount,
-      storeName: transaction.storeName,
-      date: transaction.date,
-      categoryId: transaction.categoryId,
-      inEdit: false,
+      storeName: '',
+      amount: 0,
+      date: '0000-00-00',
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount() {
-    let transaction = this.props.transaction
+    let {transaction} = this.props
     this.setState({
-      storename: transaction.name,
+      storeName: transaction.storeName,
       amount: transaction.amount,
       date: transaction.date,
     })
   }
 
-  handleChange(evt) {
-    this.setState({
-      [evt.target.name]: evt.target.value,
-    })
-  }
-
-  async handleSubmit(evt) {
-    evt.preventDefault()
-    const {amount, storeName, date} = this.state
-    await this.props.updateTransaction(this.state.id, {amount, storeName, date})
-    await this.props.getTransactions()
-  }
-
   async handleDelete(evt) {
     evt.preventDefault()
-    await this.props.deleteTransaction(this.state.id)
+    console.log('transaction to delete ID-->', this.props.id)
+    await this.props.deleteTransaction(this.props.id)
     await this.props.getTransactions()
   }
 
   render() {
-    let {id, storeName, amount} = this.state
+    let {storeName, amount} = this.state
     const date = this.state.date || ''
+    const id = this.props.id
 
     return (
       <div id="transaction-container">
@@ -66,16 +54,23 @@ export class SingleTransaction extends React.Component {
           </div>
         </li>
         <li>
-          <TransForm
-            key={id}
-            state={this.state}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-          />
+          <TransForm key={id} id={id} state={this.state} />
         </li>
       </div>
     )
   }
 }
 
-export default SingleTransaction
+const mapDispatch = (dispatch) => {
+  return {
+    updateTransaction: (id, updateInfo) => {
+      return dispatch(updateOneTransaction(id, updateInfo))
+    },
+
+    deleteTransaction: (id) => {
+      return dispatch(deleteOneTransaction(id))
+    },
+  }
+}
+
+export default connect(null, mapDispatch)(SingleTransaction)

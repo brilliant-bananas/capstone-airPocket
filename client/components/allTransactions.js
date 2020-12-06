@@ -2,10 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchTransactions} from '../store/transaction'
 import SingleTransaction from './singleTransaction'
-import {
-  updateOneTransaction,
-  deleteOneTransaction,
-} from '../store/singleTransaction'
 
 class Transactions extends React.Component {
   constructor(props) {
@@ -28,10 +24,9 @@ class Transactions extends React.Component {
               <SingleTransaction
                 transaction={transaction}
                 key={transaction.id}
+                id={transaction.id}
                 userId={userId}
-                getTransactins={this.props.getTransactins}
-                updateTransaction={this.props.updateTransaction}
-                deleteTransaction={this.props.deleteTransaction}
+                getTransactions={this.props.getTransactions}
               />
             ))}
           </ol>
@@ -48,9 +43,6 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   getTransactions: () => dispatch(fetchTransactions()),
-  updateTransaction: (id, transactionInfo) =>
-    dispatch(updateOneTransaction(id, transactionInfo)),
-  deleteTransaction: (id) => dispatch(deleteOneTransaction(id)),
 })
 
 const AllTransactions = connect(mapState, mapDispatch)(Transactions)

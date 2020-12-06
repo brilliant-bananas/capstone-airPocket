@@ -34,6 +34,7 @@ router.get('/:transactionId', async (req, res, next) => {
 // DELETE: transactions/:transactionId
 router.delete('/:transactionId', (req, res, next) => {
   try {
+    console.log('api deleteId', req.params.transactionId)
     Transaction.destroy({
       where: {
         id: req.params.transactionId,

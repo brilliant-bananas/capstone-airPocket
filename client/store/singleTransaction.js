@@ -29,6 +29,7 @@ export const fetchOneTransaction = (transactionId) => {
       const {data: transaction} = await axios.get(
         `/api/transactions/${transactionId}`
       )
+      dispatch(setOneTransaction(transaction))
     } catch (err) {
       console.error('Oops, the transaction seems to fail to get loaded', err)
     }
@@ -54,6 +55,7 @@ export const updateOneTransaction = (transactionId, transactionInfo) => {
 export const deleteOneTransaction = async (transactionId) => {
   try {
     await axios.delete(`/api/transactions/${transactionId}`)
+    dispatch(removeOneTransaction(transactionId))
   } catch (error) {
     console.error('Error deleting single transaction', error)
   }

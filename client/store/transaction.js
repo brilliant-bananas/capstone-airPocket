@@ -14,15 +14,15 @@ const initialState = []
 /**
  * ACTION CREATORS
  */
-export const setTransactions = transactions => ({
+export const setTransactions = (transactions) => ({
   type: SET_TRANSACTIONS,
-  transactions
+  transactions,
 })
 
 /**
  * THUNK CREATORS
  */
-export const fetchTransactions = () => async dispatch => {
+export const fetchTransactions = () => async (dispatch) => {
   try {
     const {data: transactions} = await axios.get('/api/transactions')
     dispatch(setTransactions(transactions))
@@ -34,7 +34,7 @@ export const fetchTransactions = () => async dispatch => {
 /**
  * REDUCER
  */
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case SET_TRANSACTIONS:
       return action.transactions
