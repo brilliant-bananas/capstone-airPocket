@@ -5,12 +5,17 @@ const Transaction = db.define('transaction', {
   amount: {
     type: Sequelize.DECIMAL(10, 2),
     validate: {
-      min: 0
-    }
+      min: 0,
+    },
   },
   storeName: {
-    type: Sequelize.STRING
-  }
+    type: Sequelize.STRING,
+  },
+  date: {
+    type: Sequelize.DATEONLY,
+    allowNull: true,
+    isDate: true,
+  },
 })
 
 module.exports = Transaction

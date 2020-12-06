@@ -11,7 +11,7 @@ const reducer = combineReducers({
   user: user,
   transactions: transaction,
   categories: categories,
-  camera: camera
+  camera: camera,
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
