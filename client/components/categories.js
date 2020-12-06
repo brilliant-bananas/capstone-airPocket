@@ -19,7 +19,7 @@ class Categories extends React.Component {
       <div>
         Categories:
         <select className="btn btn-primary">
-          {this.props.categories.map(category => (
+          {this.props.categories.map((category) => (
             <option key={category.id}>{category.name}</option>
           ))}
         </select>
@@ -28,14 +28,14 @@ class Categories extends React.Component {
     )
   }
 }
-const mapState = state => {
+const mapState = (state) => {
   return {
-    categories: state.categories
+    categories: state.categories,
   }
 }
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
-    fetchCategories: () => dispatch(fetchCategories())
+    fetchCategories: () => dispatch(fetchCategories()),
   }
 }
 export default connect(mapState, mapDispatch)(Categories)
