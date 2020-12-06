@@ -53,6 +53,27 @@ form div {
   font-size: 50px;
 }
 
+.transactionInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  color: black;
+}
+
+.changeTransaction {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  color: black;
+}
+
+#transactionForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  color: black;
+}
+
 /* body {
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;

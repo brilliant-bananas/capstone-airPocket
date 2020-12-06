@@ -140,6 +140,7 @@ const transactions = [
   {
     amount: 50,
     storeName: 'New York restaurant',
+    date: '2020-10-15',
     userId: 2,
     categoryId: 2,
   },
@@ -162,8 +163,9 @@ const transactions = [
     categoryId: 1,
   },
   {
-    amount: 200,
+    amount: 66,
     storeName: 'BP Gas',
+    date: '2020-10-23',
     userId: 1,
     categoryId: 2,
   },

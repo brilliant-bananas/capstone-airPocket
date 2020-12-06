@@ -1,18 +1,31 @@
 const router = require('express').Router()
 const {Transaction} = require('../db/models')
+const Category = require('../db/models/category')
 module.exports = router
 
 // GET: transactions/
 router.get('/', async (req, res, next) => {
   try {
     const userId = req.user.id
-    console.log('req.user--->', req.user)
     const transactions = await Transaction.findAll({
       where: {
-        userId: userId
-      }
+        userId: userId,
+      },
     })
     res.json(transactions)
+  } catch (error) {
+    next(error)
+  }
+})
+
+// GET: transactions/:transactionId
+router.get('/:transactionId', async (req, res, next) => {
+  try {
+    const {transactionId} = req.params
+    const transaction = await Transaction.findByPk(transactionId, {
+      include: {model: Category, include: [Transaction]},
+    })
+    res.json(transaction)
   } catch (error) {
     next(error)
   }
@@ -21,19 +34,22 @@ router.get('/', async (req, res, next) => {
 // DELETE: transactions/:transactionId
 router.delete('/:transactionId', (req, res, next) => {
   try {
+    console.log('api deleteId', req.params.transactionId)
     Transaction.destroy({
       where: {
-        id: req.params.transactionId
-      }
+        id: req.params.transactionId,
+      },
     })
   } catch (error) {
     next(error)
   }
 })
 
-// POST: transactions/:transactionId
+// PUT: transactions/:transactionId
 router.put('/:transactionId', async (req, res, next) => {
   try {
+    debugger
+    console.log('req.body-->', req.body)
     const updatedTransaction = await Transaction.findByPk(
       req.params.transactionId
     )

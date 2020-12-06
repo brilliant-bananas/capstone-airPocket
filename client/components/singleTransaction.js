@@ -1,61 +1,76 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import TransCategories from './transactionCategory'
+import TransForm from './transactionForm'
+import {connect} from 'react-redux'
+import {
+  updateOneTransaction,
+  deleteOneTransaction,
+} from '../store/singleTransaction'
 
-const defaultState = {
-  amount: 0,
-  storeName: ''
-}
-
-export class SingleTransaction extends React.Component {
+class SingleTransaction extends React.Component {
   constructor(props) {
     super(props)
-    this.state = defaultState
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.state = {
+      storeName: '',
+      amount: 0,
+      date: '0000-00-00',
+    }
     this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount() {
-    let transaction = this.props.transaction
+    let {transaction} = this.props
     this.setState({
-      storename: transaction.name,
-      amount: transaction.amount
+      storeName: transaction.storeName,
+      amount: transaction.amount,
+      date: transaction.date,
     })
-  }
-
-  handleChange(evt) {
-    this.setState({
-      [evt.target.name]: evt.target.value
-    })
-  }
-
-  async handleSubmit(evt) {
-    evt.preventDefault()
-    await this.props.updateTransaction(this.props.id, this.state)
-    await this.props.getTransactions()
   }
 
   async handleDelete(evt) {
     evt.preventDefault()
+    console.log('transaction to delete ID-->', this.props.id)
     await this.props.deleteTransaction(this.props.id)
     await this.props.getTransactions()
   }
 
   render() {
-    let {transaction} = this.props
-    let {id, storeName, amount} = transaction
+    let {storeName, amount} = this.state
+    const date = this.state.date || ''
+    const id = this.props.id
 
     return (
-      <li id="singleTransaction">
-        <div className="transactionInfo">
-          <Link to={`/transactions/${id}`}>
-            <h2>{storeName}</h2>
-          </Link>
-          <h3>${amount}</h3>
-        </div>
-      </li>
+      <div id="transaction-container">
+        <li id="singleTransaction">
+          <div className="transactionInfo">
+            <h3>{storeName}</h3>
+            <h3>${amount}</h3>
+            <h3>{date}</h3>
+            <TransCategories id={id} transaction={this.props.transaction} />
+            <button type="button">Edit</button>
+            <button type="button" onClick={this.handleDelete}>
+              Delete
+            </button>
+          </div>
+        </li>
+        <li>
+          <TransForm key={id} id={id} state={this.state} />
+        </li>
+      </div>
     )
   }
 }
 
-export default SingleTransaction
+const mapDispatch = (dispatch) => {
+  return {
+    updateTransaction: (id, updateInfo) => {
+      return dispatch(updateOneTransaction(id, updateInfo))
+    },
+
+    deleteTransaction: (id) => {
+      return dispatch(deleteOneTransaction(id))
+    },
+  }
+}
+
+export default connect(null, mapDispatch)(SingleTransaction)
