@@ -4,11 +4,6 @@ import {fetchTransactions} from '../store/transaction'
 import SingleTransaction from './singleTransaction'
 
 class Transactions extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
-
   componentDidMount() {
     this.props.getTransactions()
   }

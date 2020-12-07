@@ -11,20 +11,9 @@ class SingleTransaction extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      storeName: '',
-      amount: 0,
-      date: '0000-00-00',
+      isEdit: false,
     }
     this.handleDelete = this.handleDelete.bind(this)
-  }
-
-  componentDidMount() {
-    let {transaction} = this.props
-    this.setState({
-      storeName: transaction.storeName,
-      amount: transaction.amount,
-      date: transaction.date,
-    })
   }
 
   async handleDelete(evt) {
@@ -35,9 +24,9 @@ class SingleTransaction extends React.Component {
   }
 
   render() {
-    let {storeName, amount} = this.state
-    const date = this.state.date || ''
+    let {storeName, amount, date = ''} = this.props.transaction
     const id = this.props.id
+    const {isEdit} = this.state
 
     return (
       <div id="transaction-container">
@@ -47,15 +36,30 @@ class SingleTransaction extends React.Component {
             <h3>${amount}</h3>
             <h3>{date}</h3>
             <TransCategories id={id} transaction={this.props.transaction} />
-            <button type="button">Edit</button>
+            <button
+              type="button"
+              onClick={() => {
+                this.setState({isEdit: !this.state.isEdit})
+              }}
+            >
+              Edit
+            </button>
             <button type="button" onClick={this.handleDelete}>
               Delete
             </button>
           </div>
         </li>
-        <li>
-          <TransForm key={id} id={id} state={this.state} />
-        </li>
+        {isEdit && (
+          <li>
+            <TransForm
+              key={id}
+              id={id}
+              transaction={this.props.transaction}
+              updateTransaction={this.props.updateTransaction}
+              getTransactions={this.props.getTransactions}
+            />
+          </li>
+        )}
       </div>
     )
   }

@@ -4,10 +4,9 @@ class TransForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      storeName: '',
-      amount: 0,
-      date: '0000-00-00',
-      ...this.props.transaction,
+      storeName: this.props.transaction.storeName,
+      amount: this.props.transaction.amount,
+      date: this.props.transaction.date,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -26,27 +25,35 @@ class TransForm extends React.Component {
   }
 
   render() {
-    const {handleChange, handleSubmit} = this.props
     const {storeName, amount, date} = this.state
+    console.log('this state for update-->', this.state)
     return (
       <div className="form-container">
-        <form id="transactionForm" onSubmit={handleSubmit}>
+        <form id="transactionForm" onSubmit={this.handleSubmit}>
           <label htmlFor="changeName">Store Name:</label>
           <input
+            id="storeName"
             type="text"
-            name="name"
+            name="storeName"
             value={storeName}
-            onChange={handleChange}
+            onChange={this.handleChange}
           />
-          <label htmlFor="changePrice">Price:</label>
+          <label htmlFor="changeAmount">Price:</label>
           <input
+            id="amount"
             type="number"
-            name="price"
+            name="amount"
             value={amount}
-            onChange={handleChange}
+            onChange={this.handleChange}
           />
           <label htmlFor="changeDate">Date:</label>
-          <input type="text" name="date" value={date} onChange={handleChange} />
+          <input
+            id="date"
+            type="text"
+            name="date"
+            value={date}
+            onChange={this.handleChange}
+          />
           <button type="submit">Confirm Changes</button>
         </form>
       </div>

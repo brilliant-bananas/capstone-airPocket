@@ -55,9 +55,14 @@ form div {
 
 .transactionInfo {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
   color: black;
+}
+
+.transactionInfo > * {
+  margin: 4px 8px;
 }
 
 .changeTransaction {
@@ -69,9 +74,17 @@ form div {
 
 #transactionForm {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   color: black;
+  width: 75%;
+  max-width: 500px;
+}
+
+.form-container {
+  padding: 8px;
+  display: flex;
+  justify-content: center;
 }
 
 /* body {
