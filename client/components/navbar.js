@@ -16,6 +16,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/camera">Camera</Link>
           <Link to="/transactions">Transactions</Link>
           <Link to="/categories">Categories</Link>
+          <Link to="/budgets">Budgets</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
@@ -39,17 +40,17 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleClick() {
       dispatch(logout())
-    }
+    },
   }
 }
 
@@ -60,5 +61,5 @@ export default connect(mapState, mapDispatch)(Navbar)
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
 }

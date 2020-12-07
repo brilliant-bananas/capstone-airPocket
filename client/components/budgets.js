@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import BarChart from './budget-bar-chart'
 import {fetchBudgets} from '../store/budgets'
@@ -7,13 +6,12 @@ import {fetchBudgets} from '../store/budgets'
 /**
  * COMPONENT
  */
-class UserHome extends React.Component {
+class Budgets extends React.Component {
   constructor(props) {
     super()
     this.state = {
       width: 400,
       height: 20,
-      id: 'budget',
       currentMonth: new Intl.DateTimeFormat('en-US', {month: 'long'}).format(
         new Date()
       ),
@@ -27,7 +25,7 @@ class UserHome extends React.Component {
     }
   }
   render() {
-    console.log('User home Props', this.props)
+    console.log('Budgets Props', this.props)
 
     let total = 0
     let remaining = 0
@@ -45,9 +43,11 @@ class UserHome extends React.Component {
     }
     return (
       <div>
-        <h3>Welcome {this.props.firstName}!</h3>
         <div>
-          <h3>{this.state.currentMonth} Budget</h3>
+          <h3>
+            {this.state.currentMonth} Budget{' '}
+            <button className="btn btn-success">+</button>
+          </h3>
           {this.props.budgets.length > 0 && (
             <div>
               <p>
@@ -59,10 +59,32 @@ class UserHome extends React.Component {
                 spent={spent}
                 width={this.state.width}
                 height={this.state.height}
-                id={this.state.id}
+                id={'budget'}
               />
             </div>
           )}
+          {this.props.budgets.map((budget) => (
+            <div key={budget.id}>
+              <h4>
+                <u>{budget.category.name} budget</u>
+              </h4>
+              <p>
+                You have spent $
+                {Number(budget.total) - Number(budget.remaining)} out of $
+                {budget.total}. You have ${budget.remaining} remaining this
+                month.
+              </p>
+              <div id={budget.category.name[0] + budget.categoryId}>
+                <BarChart
+                  total={Number(budget.total)}
+                  spent={Number(budget.total) - Number(budget.remaining)}
+                  width={this.state.width}
+                  height={this.state.height}
+                  id={budget.category.name[0] + budget.categoryId}
+                />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     )
@@ -74,9 +96,6 @@ class UserHome extends React.Component {
  */
 const mapState = (state) => {
   return {
-    email: state.user.email,
-    firstName: state.user.firstName,
-    lastName: state.user.lastName,
     id: state.user.id,
     budgets: state.budgets,
   }
@@ -88,11 +107,4 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-export default connect(mapState, mapDispatch)(UserHome)
-
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-  email: PropTypes.string,
-}
+export default connect(mapState, mapDispatch)(Budgets)
