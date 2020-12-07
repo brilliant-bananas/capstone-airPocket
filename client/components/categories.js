@@ -14,14 +14,14 @@ class Categories extends React.Component {
     }
   }
   render() {
+    const categories = this.props.categories
     console.log('hello', this.props.categories)
     return (
-      <div>
-        Categories:
+       <div>
         <select className="btn btn-primary">
-          {this.props.categories.map((category) => (
+          {categories.map((category) => (
             <option key={category.id}>{category.name}</option>
-          ))}
+        ))}
         </select>
         <br />
       </div>
