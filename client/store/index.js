@@ -8,11 +8,9 @@ import transaction from './transaction'
 import categories from './categories'
 import budgets from './budgets'
 
-
 const reducer = combineReducers({
   user: user,
   transactions: transaction,
-  singleTransaction: singleTransaction,
   categories: categories,
   camera: camera,
   budgets: budgets,

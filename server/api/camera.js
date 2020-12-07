@@ -95,9 +95,6 @@ router.post('/upload', upload.single('photo'), async (req, res, next) => {
           storeName,
           userId: userId,
         })
-
-        if (new)
-
         console.log('New Transaction', newTransaction)
 
         res.send(newTransaction)
