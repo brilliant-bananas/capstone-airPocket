@@ -45,7 +45,7 @@ class UserHome extends React.Component {
     }
     return (
       <div>
-        <h2>Welcome {this.props.firstName}!</h2>
+        <h3>Welcome {this.props.firstName}!</h3>
         <div>
           <h3>{this.state.currentMonth} Budget</h3>
           {this.props.budgets.length > 0 && (

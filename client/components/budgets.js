@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import BarChart from './budget-bar-chart'
 import {fetchBudgets} from '../store/budgets'
@@ -45,7 +44,10 @@ class Budgets extends React.Component {
     return (
       <div>
         <div>
-          <h3>{this.state.currentMonth} Budget</h3>
+          <h3>
+            {this.state.currentMonth} Budget{' '}
+            <button className="btn btn-success">+</button>
+          </h3>
           {this.props.budgets.length > 0 && (
             <div>
               <p>

@@ -95,6 +95,11 @@ router.post('/upload', upload.single('photo'), async (req, res, next) => {
           storeName,
           userId: userId,
         })
+
+        if (new)
+
+        console.log('New Transaction', newTransaction)
+
         res.send(newTransaction)
       } else {
         res.sendStatus(400, 'Could not read data from receipt!')
