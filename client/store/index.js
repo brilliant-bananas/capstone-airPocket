@@ -6,10 +6,12 @@ import user from './user'
 import camera from './camera'
 import transaction from './transaction'
 import categories from './categories'
+import singleTransaction from '../components/singleTransaction'
 
 const reducer = combineReducers({
   user: user,
   transactions: transaction,
+  singleTransaction: singleTransaction,
   categories: categories,
   camera: camera,
 })

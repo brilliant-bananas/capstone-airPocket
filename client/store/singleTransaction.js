@@ -41,7 +41,7 @@ export const updateOneTransaction = (transactionId, transactionInfo) => {
     try {
       console.log('transactionInfo-->', transactionInfo)
       console.log('transactionID-->', transactionId)
-      const {updateInfo} = await axios.put(
+      const {data: updateInfo} = await axios.put(
         `/api/transactions/${transactionId}`,
         transactionInfo
       )
@@ -52,12 +52,14 @@ export const updateOneTransaction = (transactionId, transactionInfo) => {
   }
 }
 
-export const deleteOneTransaction = async (transactionId) => {
-  try {
-    await axios.delete(`/api/transactions/${transactionId}`)
-    dispatch(removeOneTransaction(transactionId))
-  } catch (error) {
-    console.error('Error deleting single transaction', error)
+export const deleteOneTransaction = (transactionId) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`/api/transactions/${transactionId}`)
+      dispatch(removeOneTransaction(transactionId))
+    } catch (error) {
+      console.error('Error deleting single transaction', error)
+    }
   }
 }
 
@@ -66,7 +68,7 @@ const initialState = {}
 
 // Take a look at app/redux/index.js to see where this reducer is
 // added to the Redux store with combineReducers
-export default function singleTransactionReducer(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case SET_SINGLE_TRANSACTION: {
       return action.transaction
