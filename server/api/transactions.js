@@ -40,6 +40,10 @@ router.delete('/:transactionId', (req, res, next) => {
         id: req.params.transactionId,
       },
     })
+    res.json({
+      id: req.params.transactionId,
+      message: 'deleted',
+    })
   } catch (error) {
     next(error)
   }
@@ -48,7 +52,6 @@ router.delete('/:transactionId', (req, res, next) => {
 // PUT: transactions/:transactionId
 router.put('/:transactionId', async (req, res, next) => {
   try {
-    debugger
     console.log('req.body-->', req.body)
     const updatedTransaction = await Transaction.findByPk(
       req.params.transactionId
