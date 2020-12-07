@@ -3,9 +3,6 @@ import {connect} from 'react-redux'
 import BarChart from './budget-bar-chart'
 import {fetchBudgets} from '../store/budgets'
 
-/**
- * COMPONENT
- */
 class Budgets extends React.Component {
   constructor(props) {
     super()
