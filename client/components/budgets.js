@@ -5,7 +5,7 @@ import {fetchBudgets} from '../store/budgets'
 
 class Budgets extends React.Component {
   constructor(props) {
-    super()
+    super(props)
     this.state = {
       width: 400,
       height: 20,

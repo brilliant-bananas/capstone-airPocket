@@ -2,25 +2,29 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchTransactions} from '../store/transaction'
 import SingleTransaction from './singleTransaction'
+import {Link} from 'react-router-dom'
 
 class Transactions extends React.Component {
   componentDidMount() {
     this.props.getTransactions()
   }
   render() {
-    const userId = this.props.userId || ''
     const {transactions} = this.props || {}
     return (
       <div className="container">
         <div className="items">
-          <h1 className="center">All Transactions:</h1>
+          <h1 className="center">
+            All Transactions{' '}
+            <Link to="/camera">
+              <button className="btn btn-success">+</button>
+            </Link>
+          </h1>
           <ol className="allTransactions">
             {transactions.map((transaction) => (
               <SingleTransaction
                 transaction={transaction}
                 key={transaction.id}
                 id={transaction.id}
-                userId={userId}
                 getTransactions={this.props.getTransactions}
               />
             ))}

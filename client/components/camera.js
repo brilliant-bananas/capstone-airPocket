@@ -1,5 +1,6 @@
 import React from 'react'
 import CameraFeed from './camera-feed'
+import NewTransForm from './createTransaction'
 
 const uploadImageFromCamera = async (blob) => {
   // Create Http Request Instance.
@@ -41,6 +42,8 @@ export default class Camera extends React.Component {
           uploadImageFromCamera={uploadImageFromCamera}
           uploadImageFromForm={uploadImageFromForm}
         />
+        <br />
+        <NewTransForm />
       </div>
     )
   }

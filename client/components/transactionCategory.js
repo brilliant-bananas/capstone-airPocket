@@ -7,7 +7,7 @@ class TransCategories extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      categoryId: this.props.transaction.categoryId,
+      categoryId: '',
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -47,7 +47,6 @@ class TransCategories extends React.Component {
             </option>
           ))}
         </select>
-        <br />
       </div>
     )
   }
