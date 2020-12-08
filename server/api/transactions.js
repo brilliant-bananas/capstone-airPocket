@@ -7,11 +7,14 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const userId = req.user.id
-    const transactions = await Transaction.findAll({
-      where: {
-        userId: userId,
-      },
-    })
+    const transactions = await Transaction.findAll(
+      {order: [['date', 'DESC']]},
+      {
+        where: {
+          userId: userId,
+        },
+      }
+    )
     res.json(transactions)
   } catch (error) {
     next(error)
@@ -26,6 +29,19 @@ router.get('/:transactionId', async (req, res, next) => {
       include: {model: Category, include: [Transaction]},
     })
     res.json(transaction)
+  } catch (error) {
+    next(error)
+  }
+})
+
+// POST: transactions/
+router.post('/', async (req, res, next) => {
+  try {
+    const userId = req.user.id
+    console.log('post new transaction res.body-->', req.body)
+    const transactionInfo = {...req.body, userId}
+    let newTransaction = await Transaction.create(transactionInfo)
+    res.json(newTransaction)
   } catch (error) {
     next(error)
   }
@@ -52,7 +68,7 @@ router.delete('/:transactionId', (req, res, next) => {
 // PUT: transactions/:transactionId
 router.put('/:transactionId', async (req, res, next) => {
   try {
-    console.log('req.body-->', req.body)
+    console.log('update req.body-->', req.body)
     const updatedTransaction = await Transaction.findByPk(
       req.params.transactionId
     )
