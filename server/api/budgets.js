@@ -18,3 +18,30 @@ router.get('/:userId', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/:budgetId', async (req, res, next) => {
+  try {
+    const updatedBudget = await Budget.findByPk(req.params.budgetId)
+    const data = {
+      total: req.body.amount,
+    }
+    await updatedBudget.update(data)
+    res.send(updatedBudget)
+  } catch (error) {
+    next(error)
+  }
+})
+
+// DELETE: budget/:budgetId
+router.delete('/:budgetId', async (req, res, next) => {
+  try {
+    await Budget.destroy({
+      where: {
+        id: req.params.budgetId,
+      },
+    })
+    res.sendStatus(204)
+  } catch (error) {
+    next(error)
+  }
+})
