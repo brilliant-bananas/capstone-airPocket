@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const multer = require('multer')
 const path = require('path')
-const {Transaction} = require('../db/models')
+const {Transaction, Budget} = require('../db/models')
 // // Include dependences
 const fs = require('fs')
 
@@ -90,12 +90,33 @@ router.post('/upload', upload.single('photo'), async (req, res, next) => {
         console.log('Store name:', storeName)
         console.log('amount', amount)
         console.log('userId-->', userId)
+
+        const categoryId = req.body.categoryId
         const newTransaction = await Transaction.create({
           amount,
           storeName,
           userId: userId,
+          categoryId,
         })
-        console.log('New Transaction', newTransaction)
+
+        const budget = await Budget.findOne({
+          where: {
+            userId,
+            categoryId,
+          },
+        })
+
+        if (newTransaction && budget) {
+          await Budget.update(
+            {spent: Number(budget.spent) + amount},
+            {
+              where: {
+                userId,
+                categoryId,
+              },
+            }
+          )
+        }
 
         res.send(newTransaction)
       } else {
