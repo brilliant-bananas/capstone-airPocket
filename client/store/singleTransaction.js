@@ -39,8 +39,6 @@ export const fetchOneTransaction = (transactionId) => {
 export const updateOneTransaction = (transactionId, transactionInfo) => {
   return async (dispatch) => {
     try {
-      console.log('transactionInfo-->', transactionInfo)
-      console.log('transactionID-->', transactionId)
       const {data: updateInfo} = await axios.put(
         `/api/transactions/${transactionId}`,
         transactionInfo

@@ -8,7 +8,7 @@ const Budget = db.define('budget', {
       min: 0,
     },
   },
-  remaining: {
+  spent: {
     type: Sequelize.DECIMAL(10, 2),
     validate: {
       min: 0,
@@ -20,6 +20,7 @@ const Budget = db.define('budget', {
   },
   exceed: {
     type: Sequelize.BOOLEAN,
+    allowNull: false,
     defaultValue: false,
   },
 })

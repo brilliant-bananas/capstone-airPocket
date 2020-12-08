@@ -46,38 +46,16 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-//DELETE /api/budgets/:budgetId
-router.delete('/:budgetId', async (req, res, next) => {
-  const budgetId = req.params.budgetId
-  try {
-    const budgetToDelete = await Budget.findByPk(budgetId)
-    if (!budgetToDelete) {
-      res.sendStatus(404)
-    } else {
-      await budgetToDelete.destroy()
-      res.sendStatus(204)
-    }
-  } catch (error) {
-    next(error)
-  }
-})
 
-//PUT /api/budgets/:studentId
-router.put('/:budgetId', async (res, req, next) => {
+// DELETE: budget/:budgetId
+router.delete('/:budgetId', async (req, res, next) => {
   try {
-    const {total, period, userId, categoryId} = req.body
-    const budget = await Budget.findByPk(req.params.budgetId)
-    if (!budget) {
-      res.sendStatus(404)
-    } else {
-      const updatedBudget = await budget.update({
-        total,
-        period,
-        userId,
-        categoryId,
-      })
-      res.send(updatedBudget)
-    }
+    await Budget.destroy({
+      where: {
+        id: req.params.budgetId,
+      },
+    })
+    res.sendStatus(204)
   } catch (error) {
     next(error)
   }

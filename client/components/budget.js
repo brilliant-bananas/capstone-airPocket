@@ -53,7 +53,7 @@ export class Budget extends Component {
 
         <label htmlFor="category">
           Categories:
-          <Categories onChange={this.handleChange}  value={this.state.category} />
+          <Categories onChange={this.handleChange}  />
         </label>
 
         <button type="submit">Submit</button>
