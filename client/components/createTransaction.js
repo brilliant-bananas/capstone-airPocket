@@ -32,7 +32,6 @@ class NewTransForm extends React.Component {
 
   async handleSubmit(evt) {
     evt.preventDefault()
-    debugger
     console.log('categoryId after being selected-->', this.state.categoryId)
     await this.props.newTransaction(
       this.state.storeName,
@@ -40,7 +39,6 @@ class NewTransForm extends React.Component {
       this.state.date,
       this.state.categoryId
     )
-    debugger
     await this.props.getTransactions()
     this.setState({storeName: '', amount: 0, date: '', categoryId: ''})
   }

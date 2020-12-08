@@ -45,7 +45,6 @@ export const createNewTransaction = (
 ) => async (dispatch) => {
   try {
     amount = Number(amount)
-    debugger
     const {date: newTransaction} = await axios.post('/api/transactions', {
       storeName: storeName,
       amount: amount,

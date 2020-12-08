@@ -58,6 +58,7 @@ class TransForm extends React.Component {
           <br />
           <div id="categories">
             <select
+              id="selectCategory"
               className="btn btn-primary"
               onChange={this.handleChange}
               name="categoryId"
