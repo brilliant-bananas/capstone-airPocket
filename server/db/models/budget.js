@@ -5,24 +5,23 @@ const Budget = db.define('budget', {
   total: {
     type: Sequelize.DECIMAL(10, 2),
     validate: {
-      min: 0
-    }
+      min: 0,
+    },
   },
   remaining: {
     type: Sequelize.DECIMAL(10, 2),
     validate: {
-      min: 0
-    }
+      min: 0,
+    },
   },
   period: {
     type: Sequelize.ENUM('monthly', 'annual'),
-    defaultValue: 'monthly'
+    defaultValue: 'monthly',
   },
   exceed: {
     type: Sequelize.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-  }
+    defaultValue: false,
+  },
 })
 
 module.exports = Budget

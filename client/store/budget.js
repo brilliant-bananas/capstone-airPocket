@@ -63,14 +63,16 @@ export const deleteStudent = (budgetId) => {
     }
 }
 
-const initialState = {}
+const initialState = {
+    newBudget: {}
+}
 
 export default function budgetReducer(state = initialState, action) {
     switch (action.type) {
     //  case SET_BUDGET:
     //      return action.budgets   
      case ADD_BUDGET:
-        return action.newBudget  
+        return { ...state, newBudget:action.newBudget} 
 
      default:
         return state 
