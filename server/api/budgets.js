@@ -9,7 +9,6 @@ router.get('/:userId', async (req, res, next) => {
       include: Category,
       where: {
         userId: req.params.userId,
-        // period: req.query.period,
       },
     })
     res.json(budgets)
