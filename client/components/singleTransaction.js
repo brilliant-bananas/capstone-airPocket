@@ -1,11 +1,11 @@
 import React from 'react'
-import TransCategories from './transactionCategory'
-import TransForm from './transactionForm'
+import TransForm from './updateTransaction'
 import {connect} from 'react-redux'
 import {
   updateOneTransaction,
   deleteOneTransaction,
 } from '../store/singleTransaction'
+import {fetchCategories} from '../store/categories'
 
 class SingleTransaction extends React.Component {
   constructor(props) {
@@ -14,6 +14,14 @@ class SingleTransaction extends React.Component {
       isEdit: false,
     }
     this.handleDelete = this.handleDelete.bind(this)
+  }
+
+  componentDidMount() {
+    try {
+      this.props.fetchCategories()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async handleDelete(evt) {
@@ -35,7 +43,6 @@ class SingleTransaction extends React.Component {
             <h3>{storeName}</h3>
             <h3>${amount}</h3>
             <h3>{date}</h3>
-            <TransCategories id={id} transaction={this.props.transaction} />
             <button
               type="button"
               onClick={() => {
@@ -54,7 +61,9 @@ class SingleTransaction extends React.Component {
             <TransForm
               key={id}
               id={id}
+              isEdit={this.state.isEdit}
               transaction={this.props.transaction}
+              categories={this.props.categories}
               updateTransaction={this.props.updateTransaction}
               getTransactions={this.props.getTransactions}
             />
@@ -65,8 +74,14 @@ class SingleTransaction extends React.Component {
   }
 }
 
+const mapState = (state) => {
+  return {
+    categories: state.categories,
+  }
+}
 const mapDispatch = (dispatch) => {
   return {
+    fetchCategories: () => dispatch(fetchCategories()),
     updateTransaction: (id, updateInfo) => {
       return dispatch(updateOneTransaction(id, updateInfo))
     },
@@ -77,4 +92,4 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatch)(SingleTransaction)
+export default connect(mapState, mapDispatch)(SingleTransaction)

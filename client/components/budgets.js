@@ -5,7 +5,7 @@ import {fetchBudgets, updateBudget, deleteBudget} from '../store/budgets'
 
 class Budgets extends React.Component {
   constructor(props) {
-    super()
+    super(props)
     this.state = {
       currentMonth: new Intl.DateTimeFormat('en-US', {month: 'long'}).format(
         new Date()

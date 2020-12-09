@@ -7,6 +7,7 @@ class TransForm extends React.Component {
       storeName: this.props.transaction.storeName,
       amount: this.props.transaction.amount,
       date: this.props.transaction.date,
+      categoryId: this.props.transaction.categoryId,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -19,13 +20,14 @@ class TransForm extends React.Component {
   }
 
   async handleSubmit(evt) {
+    console.log("this.props.id", this.props.id)
     evt.preventDefault()
     await this.props.updateTransaction(this.props.id, this.state)
     await this.props.getTransactions()
   }
 
   render() {
-    const {storeName, amount, date} = this.state
+    const {storeName, amount, date, categoryId} = this.state
     console.log('this state for update-->', this.state)
     return (
       <div className="form-container">
@@ -54,6 +56,24 @@ class TransForm extends React.Component {
             value={date}
             onChange={this.handleChange}
           />
+          <br />
+          <div id="categories">
+            <select
+              id="selectCategory"
+              className="btn btn-primary"
+              onChange={this.handleChange}
+              name="categoryId"
+              value={categoryId || ''}
+            >
+              <option value="">Select Category</option>
+              {this.props.categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <br />
           <button type="submit">Confirm Changes</button>
         </form>
       </div>

@@ -7,6 +7,7 @@ import camera from './camera'
 import transaction from './transaction'
 import categories from './categories'
 import budgets from './budgets'
+import budgetReducer from './budget'
 
 const reducer = combineReducers({
   user: user,
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   categories: categories,
   camera: camera,
   budgets: budgets,
+  budget: budgetReducer
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
