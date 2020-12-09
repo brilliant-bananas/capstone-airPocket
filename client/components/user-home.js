@@ -37,30 +37,29 @@ class UserHome extends React.Component {
         (acc, curr) => acc + Number(curr.total),
         0
       )
-      remaining = this.props.budgets.reduce(
-        (acc, curr) => acc + Number(curr.remaining),
+      spent = this.props.budgets.reduce(
+        (acc, curr) => acc + Number(curr.spent),
         0
       )
-      spent = total - remaining
+      remaining = total - spent
     }
     return (
       <div>
-        <h3>Welcome {this.props.firstName}!</h3>
+        <h2>Welcome {this.props.firstName}!</h2>
         <div>
+          <hr className="solid" />
           <h3>{this.state.currentMonth} Budget</h3>
           {this.props.budgets.length > 0 && (
             <div>
-              <p>
-                You have spent ${spent} out of ${total}. You have ${remaining}{' '}
-                remaining this month.
-              </p>
               <BarChart
                 total={total}
                 spent={spent}
+                showButtons={false}
                 width={this.state.width}
                 height={this.state.height}
                 id={this.state.id}
               />
+              <hr className="solid" />
             </div>
           )}
         </div>

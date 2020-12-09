@@ -1,19 +1,22 @@
 import React, {Component} from 'react'
+import Categories from './categories'
 
 export default class CameraFeed extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      file: null
+      file: null,
+      categoryId: 1,
     }
     this.onFormSubmit = this.onFormSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.onCategoryChange = this.onCategoryChange.bind(this)
   }
 
   // uploading photo
   onFormSubmit(e) {
     e.preventDefault()
-    this.props.uploadImageFromForm(this.state.file)
+    this.props.uploadImageFromForm(this.state.file, this.state.categoryId)
   }
   onChange(e) {
     this.setState({file: e.target.files[0]})
@@ -25,7 +28,7 @@ export default class CameraFeed extends Component {
    * @instance
    */
   processDevices(devices) {
-    devices.forEach(device => {
+    devices.forEach((device) => {
       console.log(device.label)
       this.setDevice(device)
     })
@@ -40,7 +43,7 @@ export default class CameraFeed extends Component {
     const {deviceId} = device
     const stream = await navigator.mediaDevices.getUserMedia({
       audio: false,
-      video: {deviceId}
+      video: {deviceId},
     })
     this.videoPlayer.srcObject = stream
     this.videoPlayer.play()
@@ -66,26 +69,35 @@ export default class CameraFeed extends Component {
     const context = this.canvas.getContext('2d')
     //getImagen from canvas
     context.drawImage(this.videoPlayer, 0, 0, 680, 360)
-    this.canvas.toBlob(this.props.uploadImageFromCamera)
+    this.canvas.toBlob(this.props.uploadImageFromCamera, this.state.categoryId)
+  }
+
+  onCategoryChange = (categoryId) => {
+    this.setState({categoryId})
   }
 
   render() {
     return (
       <div className="c-camera-feed">
+        <Categories
+          initialCategoryId={this.state.categoryId}
+          onCategoryChange={this.onCategoryChange}
+        />
         <div className="c-camera-feed__viewer">
           <video
-            ref={ref => (this.videoPlayer = ref)}
+            ref={(ref) => (this.videoPlayer = ref)}
             width="680"
             heigh="360"
           />
         </div>
+
         <button onClick={this.takePhoto}>Take photo!</button>
         <div className="c-camera-feed__stage">
           <canvas
             id="image"
             width="680"
             height="360"
-            ref={ref => (this.canvas = ref)}
+            ref={(ref) => (this.canvas = ref)}
           />
         </div>
         {/* <button onClick={this.uploadPhoto}>Upload photo!</button> */}
