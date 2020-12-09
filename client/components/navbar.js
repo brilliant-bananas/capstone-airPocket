@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     {/* <h1>airPocket</h1> */}
@@ -12,13 +11,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Link to="/">
-          <img src="/icons/wallet.png" width="35" height="35" />
-          </Link>
-          <Link to="/camera">Camera</Link>
-          <Link to="/transactions">Transactions</Link>
+          <Link to="/home">Home</Link>
           <Link to="/budgets">Budgets</Link>
-          <Link to="/budget">Budget</Link>
+          <Link to="/transactions">Transactions</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
