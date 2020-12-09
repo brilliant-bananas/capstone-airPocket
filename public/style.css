@@ -8,6 +8,7 @@ body {
   font-family: sans-serif;
   color: #926239;
   line-height: 1.6;
+  overflow: hidden;
 }
 
 a {
@@ -38,7 +39,7 @@ form div {
 }
 
 .homepage-image {
-  background-image: url(./icons/home.png);
+  background-image: url(./icons/phone-chart.png);
   background-size: cover;
   background-position: center;
   height: 100vh;

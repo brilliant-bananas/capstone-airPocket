@@ -115,7 +115,7 @@ const LogInForm = props => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/signup" variant="body2" >
                 "Don't have an account? Sign Up"
               </Link>
             </Grid>
@@ -210,8 +210,8 @@ const SignUpForm = props => {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
+              <Link href="/login" variant="body2" >
+                 "Already have an account? Sign in"
               </Link>
             </Grid>
           </Grid>
