@@ -5,7 +5,9 @@ import {fetchCategories} from '../store/categories'
 class Categories extends React.Component {
   constructor(props) {
     super(props)
-    
+
+    this.handleSelectChange = this.handleSelectChange.bind(this)
+
   }
   componentDidMount() {
     try {
@@ -15,25 +17,23 @@ class Categories extends React.Component {
     }
   }
 
-  // handleChange(handleCategoryId) {
-  //    this.setState({
-
-  //    })
-
-  // }
-  
+  handleSelectChange(evt) {
+    this.props.onCategoryChange(evt.target.value)
+  }
   render() {
-    const categories = this.props.categories
-    const onChange = this.props.onChange
-    
-    console.log('hello', this.props.categories)
-    return (
-       <div>
-        <select className="btn btn-primary" onChange={onChange} name="category" >
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>{category.name}</option>
-            
-        ))}
+   return (
+      <div>
+        <label className="col-sm-2 col-form-label">Categories:</label>
+        <select
+          className="btn btn-info"
+          onChange={this.handleSelectChange}
+          value={this.props.initialCategoryId}
+        >
+          {this.props.categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
         </select>
         <br />
       </div>

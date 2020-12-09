@@ -2,7 +2,7 @@ import React from 'react'
 import CameraFeed from './camera-feed'
 import NewTransForm from './createTransaction'
 
-const uploadImageFromCamera = async (blob) => {
+const uploadImageFromCamera = async (blob, categoryId) => {
   // Create Http Request Instance.
   const xhttp = new XMLHttpRequest()
   xhttp.onreadystatechange = function () {
@@ -15,11 +15,12 @@ const uploadImageFromCamera = async (blob) => {
 
   const formData = new FormData()
   formData.append('photo', file)
+  formData.append('categoryId', categoryId)
   xhttp.open('POST', 'api/camera/upload', true)
   xhttp.send(formData)
 }
 
-const uploadImageFromForm = async (file) => {
+const uploadImageFromForm = async (file, categoryId) => {
   // Create Http Request Instance.
   const xhttp = new XMLHttpRequest()
   xhttp.onreadystatechange = function () {
@@ -29,6 +30,7 @@ const uploadImageFromForm = async (file) => {
 
   const formData = new FormData()
   formData.append('photo', file)
+  formData.append('categoryId', categoryId)
   xhttp.open('POST', 'api/camera/upload', true)
   xhttp.send(formData)
 }

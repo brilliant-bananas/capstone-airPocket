@@ -7,7 +7,6 @@ import HomePage from './components/home-page'
 import {me} from './store'
 import Camera from './components/camera'
 import AllTransactions from './components/allTransactions'
-import Categories from './components/categories'
 import Budgets from './components/budgets'
 import Budget from './components/budget'
 
@@ -34,7 +33,6 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route path="/camera" component={Camera} />
             <Route path="/transactions" component={AllTransactions} />
-            <Route path="/categories" component={Categories} />
             <Route path="/budgets" component={Budgets} />
             <Route path="/budget" component={Budget} />
           </Switch>
