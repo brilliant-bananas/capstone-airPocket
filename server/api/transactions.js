@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const {Transaction} = require('../db/models')
+const {Transaction, Budget} = require('../db/models')
+
 const Category = require('../db/models/category')
 module.exports = router
 
@@ -38,9 +39,29 @@ router.get('/:transactionId', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const userId = req.user.id
+    console.log('IM HERE')
     console.log('post new transaction res.body-->', req.body)
     const transactionInfo = {...req.body, userId}
     let newTransaction = await Transaction.create(transactionInfo)
+
+    // const budget = await Budget.findOne({
+    //   where: {
+    //     userId,
+    //     categoryId,
+    //   },
+    // })
+
+    // if (newTransaction && budget) {
+    //   await Budget.update(
+    //     {spent: Number(budget.spent) + amount},
+    //     {
+    //       where: {
+    //         userId,
+    //         categoryId,
+    //       },
+    //     }
+    //   )
+    // }
     res.json(newTransaction)
   } catch (error) {
     next(error)

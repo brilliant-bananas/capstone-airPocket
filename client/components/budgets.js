@@ -76,6 +76,7 @@ class Budgets extends React.Component {
               <Budget
                 callCreateAction={this.callCreateAction}
                 budget={this.props.budget}
+                renderCreateForm={this.renderCreateForm}
               />
             )}
           </h3>
