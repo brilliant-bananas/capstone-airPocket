@@ -3,13 +3,15 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import BarChart from './budget-bar-chart'
 import {fetchBudgets} from '../store/budgets'
+import DonutChart from './transaction-donut-chart'
+import {fetchTransactions} from '../store/transaction'
 
 /**
  * COMPONENT
  */
 class UserHome extends React.Component {
   constructor(props) {
-    super()
+    super(props)
     this.state = {
       width: 400,
       height: 20,
@@ -19,9 +21,11 @@ class UserHome extends React.Component {
       ),
     }
   }
-  componentDidMount() {
+
+  async componentDidMount() {
     try {
-      this.props.fetchBudgets(this.props.id, 'monthly')
+      await this.props.fetchBudgets(this.props.id, 'monthly')
+      await this.props.fetchTransactions()
     } catch (error) {
       console.log(error)
     }
@@ -43,6 +47,7 @@ class UserHome extends React.Component {
       )
       remaining = total - spent
     }
+
     return (
       <div>
         <h2>Welcome {this.props.firstName}!</h2>
@@ -63,6 +68,12 @@ class UserHome extends React.Component {
             </div>
           )}
         </div>
+        <div>
+          <h3>Transactions By Category</h3>
+          <div>
+            <DonutChart transactions={this.props.transactions} />
+          </div>
+        </div>
       </div>
     )
   }
@@ -78,12 +89,14 @@ const mapState = (state) => {
     lastName: state.user.lastName,
     id: state.user.id,
     budgets: state.budgets,
+    transactions: state.transactions,
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
     fetchBudgets: (userId, period) => dispatch(fetchBudgets(userId, period)),
+    fetchTransactions: () => dispatch(fetchTransactions()),
   }
 }
 
