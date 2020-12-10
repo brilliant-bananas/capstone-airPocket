@@ -108,13 +108,6 @@ const budgets = [
     categoryId: 1,
   },
   {
-    total: 1800,
-    spent: 800,
-    period: 'annual',
-    userId: 1,
-    categoryId: 6,
-  },
-  {
     total: 80,
     spent: 61,
     period: 'monthly',
@@ -127,6 +120,7 @@ const transactions = [
   {
     amount: 50,
     storeName: 'Walmart',
+    date: '2020-10-15',
     userId: 1,
     categoryId: 1,
   },
@@ -140,18 +134,21 @@ const transactions = [
   {
     amount: 100,
     storeName: 'Target',
+    date: '2020-10-20',
     userId: 1,
     categoryId: 1,
   },
   {
     amount: 200,
     storeName: 'Home Depot',
+    date: '2020-10-23',
     userId: 1,
     categoryId: 1,
   },
   {
     amount: 200,
     storeName: 'Staples',
+    date: '2020-10-23',
     userId: 1,
     categoryId: 1,
   },
@@ -165,36 +162,14 @@ const transactions = [
   {
     amount: 50,
     storeName: 'Walmart',
+    date: '2020-10-25',
     userId: 1,
     categoryId: 2,
   },
   {
     amount: 50,
     storeName: 'Walmart',
-    userId: 1,
-    categoryId: 2,
-  },
-  {
-    amount: 50,
-    storeName: 'Walmart',
-    userId: 1,
-    categoryId: 2,
-  },
-  {
-    amount: 50,
-    storeName: 'Walmart',
-    userId: 1,
-    categoryId: 2,
-  },
-  {
-    amount: 50,
-    storeName: 'Walmart',
-    userId: 1,
-    categoryId: 2,
-  },
-  {
-    amount: 50,
-    storeName: 'Walmart',
+    date: '2020-11-03',
     userId: 1,
     categoryId: 2,
   },

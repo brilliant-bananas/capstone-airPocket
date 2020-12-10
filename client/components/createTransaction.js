@@ -49,6 +49,21 @@ class NewTransForm extends React.Component {
       <div>
         <form id="newTransactionForm" onSubmit={this.handleSubmit}>
           <h2>Add Transaction</h2>
+          <div id="categories">
+            <select
+              className="btn btn-primary"
+              onChange={this.handleChange}
+              name="categoryId"
+              value={categoryId || ''}
+            >
+              <option value="">Select Category</option>
+              {this.props.categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
           <label htmlFor="changeName">Store Name:</label>
           <input
             id="storeName"
@@ -77,23 +92,11 @@ class NewTransForm extends React.Component {
             onChange={this.handleChange}
           />
           <br />
-          <div id="categories">
-            <select
-              className="btn btn-primary"
-              onChange={this.handleChange}
-              name="categoryId"
-              value={categoryId || ''}
-            >
-              <option value="">Select Category</option>
-              {this.props.categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
-          </div>
+
           <br />
-          <button type="submit">Confirm Changes</button>
+          <button class="btn btn-success" type="submit">
+            Confirm Changes
+          </button>
         </form>
       </div>
     )
