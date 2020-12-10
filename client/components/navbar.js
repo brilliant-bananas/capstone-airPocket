@@ -14,13 +14,13 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             <img src="/icons/home.png" width="35" height="35" />
           </Link>
           <Link to="/budgets">
-            <img src="/icons/budget.png" width="35" height="35" />
+            <img src="/icons/budget.png" width="40" height="40" />
           </Link>
           <Link to="/transactions">
-            <img src="/icons/transactions.png" width="35" height="35" />
+            <img src="/icons/transactions.png" width="40" height="40" />
           </Link>
           <a href="#" onClick={handleClick}>
-            <img src="/icons/log-out.png" width="30" height="30" />
+            <img src="/icons/logout.png" width="35" height="35" />
           </a>
         </div>
       ) : (
