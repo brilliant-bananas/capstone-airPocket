@@ -38,26 +38,36 @@ class SingleTransaction extends React.Component {
 
     return (
       <div id="transaction-container">
-        <li id="singleTransaction">
-          <div className="transactionInfo">
-            <h3>{storeName}</h3>
-            <h3>${amount}</h3>
-            <h3>{date}</h3>
+        <div>
+          <div>
+            <h4>
+              <b>{storeName}</b>
+            </h4>
+            <p>
+              ${amount} Transaction Date: {''}
+              {date}
+            </p>
             <button
+              className="btn btn-warning"
               type="button"
               onClick={() => {
                 this.setState({isEdit: !this.state.isEdit})
               }}
             >
               Edit
-            </button>
-            <button type="button" onClick={this.handleDelete}>
+            </button>{' '}
+            <button
+              className="btn btn-danger"
+              type="button"
+              onClick={this.handleDelete}
+            >
               Delete
             </button>
+            <hr className="solid" />
           </div>
-        </li>
+        </div>
         {isEdit && (
-          <li>
+          <div>
             <TransForm
               key={id}
               id={id}
@@ -67,7 +77,7 @@ class SingleTransaction extends React.Component {
               updateTransaction={this.props.updateTransaction}
               getTransactions={this.props.getTransactions}
             />
-          </li>
+          </div>
         )}
       </div>
     )

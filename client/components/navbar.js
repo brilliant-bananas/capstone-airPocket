@@ -6,30 +6,36 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    {/* <h1>airPocket</h1> */}
-    <nav>
+    <nav className="navbar navbar-light bg-light">
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/budgets">Budgets</Link>
-          <Link to="/transactions">Transactions</Link>
+          <Link to="/home">
+            <img src="/icons/home.png" width="35" height="35" />
+          </Link>
+          <Link to="/budgets">
+            <img src="/icons/budget.png" width="40" height="40" />
+          </Link>
+          <Link to="/transactions">
+            <img src="/icons/transactions.png" width="40" height="40" />
+          </Link>
           <a href="#" onClick={handleClick}>
-            Logout
+            <img src="/icons/logout.png" width="35" height="35" />
           </a>
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/">
-            {/* <img src={test} /> */}
-            <img src="/icons/wallet.png" width="50" height="50" />
+          <Link to="/login">
+            <img src="/icons/log-in.png" width="35" height="35" />
           </Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/signup">
+            <img src="/icons/sign-up.png" width="40" height="40" />
+          </Link>
         </div>
       )}
     </nav>
+
     <hr />
   </div>
 )

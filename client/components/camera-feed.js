@@ -86,24 +86,26 @@ export default class CameraFeed extends Component {
         <div className="c-camera-feed__viewer">
           <video
             ref={(ref) => (this.videoPlayer = ref)}
-            width="680"
-            heigh="360"
+            width="400"
+            heigh="150"
           />
         </div>
 
-        <button onClick={this.takePhoto}>Take photo!</button>
+        <button class="btn btn-warning" onClick={this.takePhoto}>
+          Take photo!
+        </button>
         <div className="c-camera-feed__stage">
           <canvas
             id="image"
-            width="680"
-            height="360"
+            width="400"
+            heigh="150"
             ref={(ref) => (this.canvas = ref)}
           />
         </div>
-        {/* <button onClick={this.uploadPhoto}>Upload photo!</button> */}
         <form onSubmit={this.onFormSubmit}>
-          <h1>File Upload</h1>
+          <h3>Receipt Upload</h3>
           <input type="file" name="myImage" onChange={this.onChange} />
+
           <button type="submit">Upload</button>
         </form>
       </div>

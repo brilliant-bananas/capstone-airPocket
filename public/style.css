@@ -6,9 +6,8 @@
 body {
   margin: 0;
   font-family: sans-serif;
-  color: #926239;
   line-height: 1.6;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 a {
@@ -38,17 +37,7 @@ form div {
   left: calc(50% - 50px);
 }
 
-.homepage-image {
-  background-image: url(./icons/phone-chart.png);
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
-  padding: 0 20px;
-}
+
 
 .homepage-image h1 {
   font-size: 50px;
@@ -99,6 +88,14 @@ form div {
   width: 100%;
 }
 
+.header {
+  width: 100%;
+  background-color:#edf6f9;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 3rem;
+  font-weight: 700;
+}
 /* body {
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -108,14 +105,7 @@ form div {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.header {
-  width: 100%;
-  background-color:#2a9d8f;
-  color: #FFFFFF;
-  text-align: center;
-  line-height: 3rem;
-  font-weight: 700;
-}
+
 
 .container-photo {
   width: 100vw;
@@ -167,7 +157,7 @@ form div {
 .loginbox {
     color: #fff;
     padding: 110px 50px;
-} 
+}
 
 
 h1 {

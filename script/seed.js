@@ -108,13 +108,6 @@ const budgets = [
     categoryId: 1,
   },
   {
-    total: 1800,
-    spent: 800,
-    period: 'annual',
-    userId: 1,
-    categoryId: 6,
-  },
-  {
     total: 80,
     spent: 61,
     period: 'monthly',
