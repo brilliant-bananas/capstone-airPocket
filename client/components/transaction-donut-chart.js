@@ -128,10 +128,3 @@ export default class DonutChart extends React.Component {
     return <svg ref={this.ref} />
   }
 }
-
-// parent constructor
-// child constructor
-// parent render
-// child render
-// parent.componentDidMount -> fetch(...) ... .... ... .-> parent.componentDidUpdate -> child.compentDIdUpdate
-// child.componentDidMount
