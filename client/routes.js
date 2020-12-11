@@ -10,6 +10,7 @@ import AllTransactions from './components/allTransactions'
 import Budgets from './components/budgets'
 import Budget from './components/budget'
 import CreateCategory from './components/createCategory'
+import AllCategories  from './components/allCategories'
 
 /**
  * COMPONENT
@@ -28,7 +29,8 @@ class Routes extends Component {
         <Route exact path="/" component={HomePage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        {isLoggedIn && (
+        
+         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
@@ -37,6 +39,7 @@ class Routes extends Component {
             <Route path="/budgets" component={Budgets} />
             <Route path="/budget" component={Budget} />
             <Route path="/createCategories" component={CreateCategory} />
+            <Route path="/allCategories" component={AllCategories} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

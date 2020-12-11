@@ -99,6 +99,16 @@ form div {
   width: 100%;
 }
 
+#edit-button {
+  display:flex;
+  float: right;
+  /* margin-left: -100%; */
+  /* margin-top: 2em; */
+   margin-right: 40em; 
+}
+  
+
+
 /* body {
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
