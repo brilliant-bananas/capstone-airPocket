@@ -35,9 +35,11 @@ router.delete('/:categoryId', (req, res, next) => {
   }
 })
 
-// POST: categories/:categoryId
+// PUT: categories/:categoryId
 router.put('/:categoryId', async (req, res, next) => {
   try {
+    console.log("the params are", req.params.categoryId)
+    console.log("the body is", req.body)
     const updatedCategory = await Category.findByPk(req.params.categoryId)
     await updatedCategory.update(req.body)
     res.json(updatedCategory)
