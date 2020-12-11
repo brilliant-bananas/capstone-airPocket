@@ -19,6 +19,29 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
+//GET /api/budgets
+router.get('/', async (req, res, next) => {
+  try {
+    const allBudgets = await Budget.findAll()
+    res.send(allBudgets)
+  } catch (error) {
+    next(error)
+  }
+})
+
+//GET /api/budgets/:budgetId
+router.get('/:budgetId', async (req, res, next) => {
+  try {
+    const budget = await Budget.findByPk(req.params.budgetId, {
+      include: Category,
+      include: User,
+    })
+    res.send(budget)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.put('/:budgetId', async (req, res, next) => {
   try {
     const updatedBudget = await Budget.findByPk(req.params.budgetId)
@@ -41,6 +64,22 @@ router.delete('/:budgetId', async (req, res, next) => {
       },
     })
     res.sendStatus(204)
+  } catch (error) {
+    next(error)
+  }
+})
+
+//POST /api/budgets
+router.post('/', async (req, res, next) => {
+  try {
+    const {total, userId, categoryId} = req.body
+    console.log('req.body', req.body)
+    const newBudget = await Budget.create({
+      total,
+      userId,
+      categoryId,
+    })
+    res.send(newBudget)
   } catch (error) {
     next(error)
   }
