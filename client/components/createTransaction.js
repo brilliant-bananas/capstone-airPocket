@@ -94,7 +94,7 @@ class NewTransForm extends React.Component {
           <br />
 
           <br />
-          <button class="btn btn-success" type="submit">
+          <button className="btn btn-success" type="submit">
             Confirm Changes
           </button>
         </form>

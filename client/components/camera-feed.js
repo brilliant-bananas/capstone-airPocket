@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
+import {Spinner, Modal} from 'react-bootstrap'
 import Categories from './categories'
+import axios from 'axios'
 
 export default class CameraFeed extends Component {
   constructor(props) {
@@ -7,6 +9,7 @@ export default class CameraFeed extends Component {
     this.state = {
       file: null,
       categoryId: 1,
+      showModal: false,
     }
     this.onFormSubmit = this.onFormSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
@@ -14,10 +17,19 @@ export default class CameraFeed extends Component {
   }
 
   // uploading photo
-  onFormSubmit(e) {
+  async onFormSubmit(e) {
     e.preventDefault()
-    this.props.uploadImageFromForm(this.state.file, this.state.categoryId)
+    this.setState({
+      showModal: true,
+    })
+
+    await this.props.uploadImageFromForm(this.state.file, this.state.categoryId)
+
+    this.setState({
+      showModal: false,
+    })
   }
+
   onChange(e) {
     this.setState({file: e.target.files[0]})
   }
@@ -91,7 +103,7 @@ export default class CameraFeed extends Component {
           />
         </div>
 
-        <button class="btn btn-warning" onClick={this.takePhoto}>
+        <button className="btn btn-warning" onClick={this.takePhoto}>
           Take photo!
         </button>
         <div className="c-camera-feed__stage">
@@ -108,6 +120,18 @@ export default class CameraFeed extends Component {
 
           <button type="submit">Upload</button>
         </form>
+        <Modal
+          show={this.state.showModal}
+          onHide={() => this.setState({showModal: false})}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Processing</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>Processing your receipt...</h4>
+            <Spinner animation="border" variant="info" />
+          </Modal.Body>
+        </Modal>
       </div>
     )
   }
