@@ -33,6 +33,12 @@ const uploadImageFromForm = async (file, categoryId) => {
   formData.append('categoryId', categoryId)
   xhttp.open('POST', 'api/camera/upload', true)
   xhttp.send(formData)
+
+  await new Promise((resolve) => {
+    xhttp.onload = () => {
+      resolve()
+    }
+  })
 }
 
 export default class Camera extends React.Component {
