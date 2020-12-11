@@ -1,6 +1,5 @@
 const router = require('express').Router()
-const {Transaction} = require('../db/models')
-const Category = require('../db/models/category')
+const {Transaction, Budget, Category} = require('../db/models')
 module.exports = router
 
 // GET: transactions/
@@ -8,6 +7,7 @@ router.get('/', async (req, res, next) => {
   try {
     const userId = req.user.id
     const transactions = await Transaction.findAll(
+      {include: Category},
       {order: [['date', 'DESC']]},
       {
         where: {
@@ -38,9 +38,21 @@ router.get('/:transactionId', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const userId = req.user.id
-    console.log('post new transaction res.body-->', req.body)
     const transactionInfo = {...req.body, userId}
-    let newTransaction = await Transaction.create(transactionInfo)
+
+    const {categoryId, amount} = transactionInfo
+    const newTransaction = await Transaction.create(transactionInfo)
+    const budget = await Budget.findOne({
+      where: {
+        userId,
+        categoryId,
+      },
+    })
+    if (budget) {
+      await budget.update({
+        spent: Number(budget.spent) + Number(amount),
+      })
+    }
     res.json(newTransaction)
   } catch (error) {
     next(error)
@@ -68,7 +80,6 @@ router.delete('/:transactionId', (req, res, next) => {
 // PUT: transactions/:transactionId
 router.put('/:transactionId', async (req, res, next) => {
   try {
-    console.log('update req.body-->', req.body)
     const updatedTransaction = await Transaction.findByPk(
       req.params.transactionId
     )

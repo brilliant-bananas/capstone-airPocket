@@ -1,12 +1,15 @@
 import React, {Component} from 'react'
+import {Spinner, Modal} from 'react-bootstrap'
 import Categories from './categories'
+import axios from 'axios'
 
 export default class CameraFeed extends Component {
   constructor(props) {
     super(props)
     this.state = {
       file: null,
-      categoryId: 1,
+      categoryId: '',
+      showModal: false,
     }
     this.onFormSubmit = this.onFormSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
@@ -14,10 +17,19 @@ export default class CameraFeed extends Component {
   }
 
   // uploading photo
-  onFormSubmit(e) {
+  async onFormSubmit(e) {
     e.preventDefault()
-    this.props.uploadImageFromForm(this.state.file, this.state.categoryId)
+    this.setState({
+      showModal: true,
+    })
+
+    await this.props.uploadImageFromForm(this.state.file, this.state.categoryId)
+
+    this.setState({
+      showModal: false,
+    })
   }
+
   onChange(e) {
     this.setState({file: e.target.files[0]})
   }
@@ -86,26 +98,42 @@ export default class CameraFeed extends Component {
         <div className="c-camera-feed__viewer">
           <video
             ref={(ref) => (this.videoPlayer = ref)}
-            width="680"
-            heigh="360"
+            width="400"
+            heigh="150"
           />
         </div>
 
-        <button onClick={this.takePhoto}>Take photo!</button>
+        <button className="btn btn-warning" onClick={this.takePhoto}>
+          Take photo!
+        </button>
         <div className="c-camera-feed__stage">
           <canvas
             id="image"
-            width="680"
-            height="360"
+            width="400"
+            heigh="150"
             ref={(ref) => (this.canvas = ref)}
           />
         </div>
-        {/* <button onClick={this.uploadPhoto}>Upload photo!</button> */}
         <form onSubmit={this.onFormSubmit}>
-          <h1>File Upload</h1>
+          <h3>Receipt Upload</h3>
           <input type="file" name="myImage" onChange={this.onChange} />
-          <button type="submit">Upload</button>
+
+          <button className="btn btn-success" type="submit">
+            Upload
+          </button>
         </form>
+        <Modal
+          show={this.state.showModal}
+          onHide={() => this.setState({showModal: false})}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Processing..</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>Processing your receipt and saving data...</h4>
+            <Spinner animation="border" variant="success" />
+          </Modal.Body>
+        </Modal>
       </div>
     )
   }

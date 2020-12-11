@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-
-import { postNewBudget } from '../store/budget'
-import { fetchCategories } from '../store/categories'
+import {postNewBudget} from '../store/budget'
+import {fetchCategories} from '../store/categories'
+import {fetchBudgets} from '../store/budgets'
 
 export class Budget extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ export class Budget extends Component {
     this.state = {
       total: '',
       categoryId: '',
-      userId: ''
+      userId: '',
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -19,7 +19,7 @@ export class Budget extends Component {
   componentDidMount() {
     this.props.fetchCategories()
   }
-  
+
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
@@ -31,17 +31,12 @@ export class Budget extends Component {
     this.props.postNewBudget({
       total: this.state.total,
       categoryId: this.state.categoryId,
-      userId: this.props.userId
+      userId: this.props.userId,
     })
-    this.setState({
-      total: '',
-      categoryId: '',
-      userId: ''
-    })
+    this.props.renderCreateForm()
+    this.props.fetchBudgets(this.props.userId, 'monthly')
   }
-  
   render() {
-      
     const categories = this.props.categories
     return (
       <form id="form" onSubmit={this.handleSubmit}>
@@ -54,28 +49,29 @@ export class Budget extends Component {
             onChange={this.handleChange}
           />
         </label>
-        
+
         <br />
-        
+
         <div id="categories">
-          <select 
+          <select
             className="btn btn-primary"
             onChange={this.handleChange}
             name="categoryId"
             value={this.state.categoryId || ''}
           >
-           <option value="">Select Category</option>
-           {categories.map((category) => (
-            <option key={category.id} value={category.id} >
-             {category.name}
-           </option>
-          ))}
-          </select>  
-        </div>  
-
-        <br/>
-        <br/>
-        <button type="submit">Submit</button>
+            <option value="">Select Category</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <br />
+        <br />
+        <button className="btn btn-success" onClick={this.renderCreateForm}>
+          Submit
+        </button>
       </form>
     )
   }
@@ -90,8 +86,9 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
+    fetchBudgets: (userId, period) => dispatch(fetchBudgets(userId, period)),
     postNewBudget: (newBudgetObj) => dispatch(postNewBudget(newBudgetObj)),
-    fetchCategories: () => dispatch(fetchCategories())
+    fetchCategories: () => dispatch(fetchCategories()),
   }
 }
 

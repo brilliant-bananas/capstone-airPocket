@@ -1,13 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {auth} from '../store'
+import {signup} from '../store'
 
 /**
  * COMPONENT
  */
-const AuthForm = (props) => {
+const SignUp = (props) => {
   const {name, displayName, handleSubmit, error} = props
+
   return (
     <div>
       <form
@@ -17,9 +18,24 @@ const AuthForm = (props) => {
       >
         <p className="h4 mb-4">Air Pocket</p>
         <p className="h4 mb-4">
-          <img src="/icons/logo.png" width="75" height="75" />
+          <img src="/icons/logo.png" width="30" height="30" />
         </p>
-        <div className="md-form">
+
+        <div>
+          <label htmlFor="firstName">
+            <small>First Name</small>
+          </label>
+          <input className="form-control" name="firstName" required />
+        </div>
+
+        <div>
+          <label htmlFor="lastName">
+            <small>Last Name</small>
+          </label>
+          <input className="form-control" name="lastName" required />
+        </div>
+
+        <div>
           <label htmlFor="email">
             <small>Email</small>
           </label>
@@ -36,13 +52,14 @@ const AuthForm = (props) => {
             required
           />
         </div>
-        <br />
         <div>
-          <button className="btn btn-success" type="submit">
+          <button
+            className="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
+            type="submit"
+          >
             {displayName}
           </button>
         </div>
-
         {error && error.response && <div> {error.response.data} </div>}
         <br />
       </form>
@@ -57,10 +74,11 @@ const AuthForm = (props) => {
  *   function, and share the same Component. This is a good example of how we
  *   can stay DRY with interfaces that are very similar to each other!
  */
-const mapLogin = (state) => {
+
+const mapSignup = (state) => {
   return {
-    name: 'login',
-    displayName: 'Login',
+    name: 'signup',
+    displayName: 'Sign Up',
     error: state.user.error,
   }
 }
@@ -69,21 +87,22 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
-      const formName = evt.target.name
+
+      const firstName = evt.target.firstName.value
+      const lastName = evt.target.lastName.value
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      dispatch(signup(firstName, lastName, email, password))
     },
   }
 }
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-// export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export const Signup = connect(mapSignup, mapDispatch)(SignUp)
 
 /**
  * PROP TYPES
  */
-AuthForm.propTypes = {
+SignUp.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,

@@ -2,17 +2,21 @@ import React from 'react'
 import {connect} from 'react-redux'
 import BarChart from './budget-bar-chart'
 import {fetchBudgets, updateBudget, deleteBudget} from '../store/budgets'
+import Budget from './budget'
 
 class Budgets extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      renderCreateForm: false,
       currentMonth: new Intl.DateTimeFormat('en-US', {month: 'long'}).format(
         new Date()
       ),
     }
     this.updateAction = this.updateAction.bind(this)
     this.deleteAction = this.deleteAction.bind(this)
+    this.renderCreateForm = this.renderCreateForm.bind(this)
+    this.callCreateAction = this.callCreateAction.bind(this)
   }
 
   async updateAction(budgetId, budgetInfo) {
@@ -34,9 +38,18 @@ class Budgets extends React.Component {
       console.log(error)
     }
   }
-  render() {
-    console.log('Budgets Props', this.props)
+  renderCreateForm() {
+    this.setState({
+      renderCreateForm: !this.state.renderCreateForm,
+    })
+  }
 
+  callCreateAction(budgetId, budgetInfo) {
+    this.renderCreateForm()
+    this.props.updateAction(budgetId, budgetInfo)
+    this.updateProgressBar(budgetInfo)
+  }
+  render() {
     let total = 0
     let spent = 0
     if (this.props.budgets.length > 0) {
@@ -54,7 +67,16 @@ class Budgets extends React.Component {
         <div>
           <h3>
             {this.state.currentMonth} Budget{' '}
-            <button className="btn btn-success">+</button>
+            <button className="btn btn-success" onClick={this.renderCreateForm}>
+              +
+            </button>
+            {this.state.renderCreateForm && (
+              <Budget
+                callCreateAction={this.callCreateAction}
+                budget={this.props.budget}
+                renderCreateForm={this.renderCreateForm}
+              />
+            )}
           </h3>
           {this.props.budgets.length > 0 && (
             <div>

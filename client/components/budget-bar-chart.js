@@ -20,8 +20,6 @@ export default class BarChart extends Component {
   }
 
   drawChart() {
-    console.log('Bar chart Props', this.props)
-
     let progressBarColor = 'green'
     const segmentWidth = 350
 

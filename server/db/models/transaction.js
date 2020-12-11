@@ -15,6 +15,7 @@ const Transaction = db.define('transaction', {
     type: Sequelize.DATEONLY,
     allowNull: true,
     isDate: true,
+    defaultValue: Sequelize.NOW,
   },
 })
 

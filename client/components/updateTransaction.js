@@ -20,7 +20,7 @@ class TransForm extends React.Component {
   }
 
   async handleSubmit(evt) {
-    console.log("this.props.id", this.props.id)
+    console.log('this.props.id', this.props.id)
     evt.preventDefault()
     await this.props.updateTransaction(this.props.id, this.state)
     await this.props.getTransactions()
@@ -28,7 +28,6 @@ class TransForm extends React.Component {
 
   render() {
     const {storeName, amount, date, categoryId} = this.state
-    console.log('this state for update-->', this.state)
     return (
       <div className="form-container">
         <form id="transactionForm" onSubmit={this.handleSubmit}>

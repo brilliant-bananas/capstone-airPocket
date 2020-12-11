@@ -1,5 +1,4 @@
 'use strict'
-const {green, red} = require('chalk')
 const db = require('../server/db')
 const {User, Category, Budget, Transaction} = require('../server/db/models')
 
@@ -103,16 +102,9 @@ const budgets = [
   {
     total: 470,
     spent: 300,
-    period: 'annual',
+    period: 'monthly',
     userId: 2,
     categoryId: 1,
-  },
-  {
-    total: 1800,
-    spent: 800,
-    period: 'annual',
-    userId: 1,
-    categoryId: 6,
   },
   {
     total: 80,
@@ -127,86 +119,163 @@ const transactions = [
   {
     amount: 50,
     storeName: 'Walmart',
-    date: '2020-11-15',
+    date: '2020-12-15',
     userId: 1,
     categoryId: 1,
   },
   {
-    amount: 50,
+    amount: 30,
     storeName: 'New York restaurant',
-    date: '2020-09-15',
+    date: '2020-12-01',
     userId: 2,
     categoryId: 2,
   },
   {
-    amount: 100,
+    amount: 52,
     storeName: 'Target',
-    date: '2020-09-21',
+    date: '2020-12-11',
     userId: 1,
     categoryId: 1,
   },
   {
-    amount: 200,
+    amount: 14,
     storeName: 'Home Depot',
-    date: '2020-07-15',
+    date: '2020-12-05',
     userId: 1,
     categoryId: 1,
   },
   {
-    amount: 200,
+    amount: 89,
     storeName: 'Staples',
-    date: '2020-09-15',
+    date: '2020-12-01',
     userId: 1,
     categoryId: 1,
   },
   {
-    amount: 66,
+    amount: 67,
     storeName: 'BP Gas',
-    date: '2020-10-23',
+    date: '2020-12-13',
     userId: 1,
     categoryId: 2,
   },
   {
-    amount: 50,
-    storeName: 'Walmart',
-    date: '2020-02-15',
+    amount: 31.5,
+    storeName: 'Whole Foods',
+    date: '2020-12-02',
     userId: 1,
     categoryId: 2,
   },
   {
-    amount: 50,
+    amount: 49,
     storeName: 'Walmart',
-    date: '2020-05-15',
+    date: '2020-11-12',
     userId: 1,
     categoryId: 2,
   },
   {
-    amount: 50,
+    amount: 78,
     storeName: 'Walmart',
-    date: '2020-04-15',
+    date: '2020-11-16',
     userId: 1,
     categoryId: 2,
   },
   {
-    amount: 50,
-    storeName: 'Walmart',
-    date: '2020-09-15',
+    amount: 69,
+    storeName: 'Kroger',
+    date: '2020-11-20',
     userId: 1,
     categoryId: 2,
   },
   {
-    amount: 50,
-    storeName: 'Walmart',
-    date: '2020-09-15',
-    userId: 1,
+    amount: 30,
+    storeName: 'PG&E',
+    date: '2020-11-17',
+    userId: 2,
+    categoryId: 5,
+  },
+  {
+    amount: 15,
+    storeName: 'Safeway',
+    date: '2020-12-03',
+    userId: 2,
+    categoryId: 1,
+  },
+  {
+    amount: 75,
+    storeName: 'One of a Kind Studio',
+    date: '2020-11-25',
+    userId: 2,
+    categoryId: 6,
+  },
+  {
+    amount: 65,
+    storeName: 'Healthy Treats',
+    date: '2020-11-16',
+    userId: 2,
+    categoryId: 5,
+  },
+  {
+    amount: 42,
+    storeName: 'Sweet Spot',
+    date: '2020-11-21',
+    userId: 2,
     categoryId: 2,
   },
   {
-    amount: 50,
-    storeName: 'Walmart',
-    date: '2020-09-15',
+    amount: 74,
+    storeName: 'Decorama Boutique',
+    date: '2020',
     userId: 1,
-    categoryId: 2,
+    categoryId: 3,
+  },
+  {
+    amount: 70,
+    storeName: 'Farm to Shelf',
+    date: '2020-11-10',
+    userId: 1,
+    categoryId: 4,
+  },
+  {
+    amount: 40,
+    storeName: 'Spice Heaven',
+    date: '2019-11-20',
+    userId: 1,
+    categoryId: 3,
+  },
+  {
+    amount: 18,
+    storeName: 'Plentiful Online',
+    date: '2020-12-09',
+    userId: 2,
+    categoryId: 4,
+  },
+  {
+    amount: 62,
+    storeName: 'Not Just Groceries',
+    date: '2020-11-10',
+    userId: 1,
+    categoryId: 5,
+  },
+  {
+    amount: 79,
+    storeName: 'The Full Cart',
+    date: '2020-12-09',
+    userId: 2,
+    categoryId: 6,
+  },
+  {
+    amount: 88,
+    storeName: 'Etsy',
+    date: '2020-11-11',
+    userId: 2,
+    categoryId: 4,
+  },
+  {
+    amount: 73,
+    storeName: 'WholeSome',
+    date: '2020-11-14',
+    userId: 1,
+    categoryId: 6,
   },
   {
     amount: 50.00,
@@ -344,9 +413,9 @@ async function seed() {
       })
     )
 
-    console.log(green(`seeded successfully`))
+    console.log(`seeded successfully`)
   } catch (err) {
-    console.log(red(err))
+    console.log(err)
   }
 }
 

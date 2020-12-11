@@ -7,7 +7,6 @@ class Categories extends React.Component {
     super(props)
 
     this.handleSelectChange = this.handleSelectChange.bind(this)
-
   }
   componentDidMount() {
     try {
@@ -21,20 +20,21 @@ class Categories extends React.Component {
     this.props.onCategoryChange(evt.target.value)
   }
   render() {
-   return (
+    return (
       <div>
-        <label className="col-sm-2 col-form-label">Categories:</label>
         <select
-          className="btn btn-info"
+          className="btn btn-primary"
           onChange={this.handleSelectChange}
           value={this.props.initialCategoryId}
         >
+          <option defaultValue="">Select Category</option>
           {this.props.categories.map((category) => (
             <option key={category.id} value={category.id}>
               {category.name}
             </option>
           ))}
         </select>
+        <br />
         <br />
       </div>
     )

@@ -8,6 +8,9 @@ import App from './app'
 
 // establishes socket connection
 import './socket'
+//serviceWorker
+
+// import * as serviceWorker from '../public/sw.js'
 
 ReactDOM.render(
   <Provider store={store}>

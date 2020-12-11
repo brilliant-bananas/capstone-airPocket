@@ -1,6 +1,6 @@
 const router = require('express').Router()
-const {Budget, Category, User} = require('../db/models')
-
+const {Budget} = require('../db/models')
+const {Category} = require('../db/models')
 module.exports = router
 
 router.get('/:userId', async (req, res, next) => {
@@ -9,8 +9,10 @@ router.get('/:userId', async (req, res, next) => {
       include: Category,
       where: {
         userId: req.params.userId,
+        period: req.query.period,
       },
     })
+
     res.json(budgets)
   } catch (err) {
     next(err)
@@ -18,10 +20,10 @@ router.get('/:userId', async (req, res, next) => {
 })
 
 //GET /api/budgets
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
-     const allBudgets = await Budget.findAll();
-     res.send(allBudgets) 
+    const allBudgets = await Budget.findAll()
+    res.send(allBudgets)
   } catch (error) {
     next(error)
   }
@@ -39,23 +41,19 @@ router.get('/:budgetId', async (req, res, next) => {
     next(error)
   }
 })
-
-//POST /api/budgets
-router.post('/', async (req, res, next) => {
+//PUT /api/budgets
+router.put('/:budgetId', async (req, res, next) => {
   try {
-    const { total, userId, categoryId } = req.body
-    console.log('req.body', req.body)
-    const newBudget = await Budget.create({
-      total,
-      userId,
-      categoryId,
-    })
-    res.send(newBudget)
+    const updatedBudget = await Budget.findByPk(req.params.budgetId)
+    const data = {
+      total: req.body.amount,
+    }
+    await updatedBudget.update(data)
+    res.send(updatedBudget)
   } catch (error) {
     next(error)
   }
 })
-
 
 // DELETE: budget/:budgetId
 router.delete('/:budgetId', async (req, res, next) => {
@@ -66,6 +64,22 @@ router.delete('/:budgetId', async (req, res, next) => {
       },
     })
     res.sendStatus(204)
+  } catch (error) {
+    next(error)
+  }
+})
+
+//POST /api/budgets
+router.post('/', async (req, res, next) => {
+  try {
+    const {total, userId, categoryId} = req.body
+    console.log('req.body', req.body)
+    const newBudget = await Budget.create({
+      total,
+      userId,
+      categoryId,
+    })
+    res.send(newBudget)
   } catch (error) {
     next(error)
   }
