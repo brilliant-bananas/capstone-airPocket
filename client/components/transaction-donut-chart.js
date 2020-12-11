@@ -6,10 +6,10 @@ export default class DonutChart extends React.Component {
     super(props)
     const dataArr = this.getMonthlyTotal()
     this.state = {
-      width: 500,
-      height: 500,
-      innerRadius: 80,
-      outerRadius: 160,
+      width: 450,
+      height: 450,
+      innerRadius: 75,
+      outerRadius: 140,
     }
     this.ref = createRef()
     this.createPie = d3
@@ -23,7 +23,7 @@ export default class DonutChart extends React.Component {
     this.colors = d3
       .scaleOrdinal()
       .domain(dataArr)
-      .range(['#00bfff', '#ff8000', '#ff00bf', '#80ff00', '#8000ff'])
+      .range(['#8ac408', '#0ccaca', '#00c20c', '#a7e218', '#2EC771'])
     this.format = d3.format('.2f')
   }
 
@@ -55,7 +55,7 @@ export default class DonutChart extends React.Component {
       .attr('text-anchor', 'middle')
       .attr('alignment-baseline', 'middle')
       .attr('transform', (d) => `translate(${this.createArc.centroid(d)})`)
-      .style('fill', 'white')
+      .style('fill', 'black')
       .style('font-size', 10)
       .text((d) => {
         return d.data.category + ': ' + d.data.cost
@@ -74,7 +74,7 @@ export default class DonutChart extends React.Component {
     console.log('monthlyTransacts-->', monthlyTransacts)
     const costPerCategory = {}
     for (let i = 0; i < monthlyTransacts.length; i++) {
-      let category = monthlyTransacts[i].categoryId
+      let category = monthlyTransacts[i].category.name
       let costPerTrans = Number(monthlyTransacts[i].amount)
       if (costPerCategory[category]) {
         costPerCategory[category] += costPerTrans
@@ -121,7 +121,10 @@ export default class DonutChart extends React.Component {
       .attr('text-anchor', 'middle')
       .attr('alignment-baseline', 'middle')
       .attr('transform', (d) => `translate(${this.createArc.centroid(d)})`)
-      .text((d) => this.format(parseInt(d.data.cost)))
+      // .text((d) => this.format())
+      .text((d) => {
+        return `${d.data.category} - $${this.format(parseInt(d.data.cost))}`
+      })
   }
 
   render() {
