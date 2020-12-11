@@ -10,7 +10,7 @@ import App from './app'
 import './socket'
 //serviceWorker
 
-import * as serviceWorker from '../public/sw.js'
+// import * as serviceWorker from '../public/sw.js'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -20,5 +20,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('app')
 )
-
-serviceWorker.register()

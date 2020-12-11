@@ -1,5 +1,5 @@
-let CACHE_NAME = 'my-site-cache-v1'
-const urlsToCache = ['/', '/index.html']
+let CACHE_NAME = 'my-airPocket-cache-v1'
+const urlsToCache = ['/', '/index.html', '/style.css']
 self.addEventListener('install', function (event) {
   // Perform install steps
   event.waitUntil(
