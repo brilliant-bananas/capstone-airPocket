@@ -1,5 +1,4 @@
 'use strict'
-const {green, red} = require('chalk')
 const db = require('../server/db')
 const {User, Category, Budget, Transaction} = require('../server/db/models')
 
@@ -337,9 +336,9 @@ async function seed() {
       })
     )
 
-    console.log(green(`seeded successfully`))
+    console.log(`seeded successfully`)
   } catch (err) {
-    console.log(red(err))
+    console.log(err)
   }
 }
 

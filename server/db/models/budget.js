@@ -13,6 +13,7 @@ const Budget = db.define('budget', {
     validate: {
       min: 0,
     },
+    defaultValue: 0,
   },
   period: {
     type: Sequelize.ENUM('monthly', 'annual'),

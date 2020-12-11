@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-
 import {postNewBudget} from '../store/budget'
 import {fetchCategories} from '../store/categories'
+import {fetchBudgets} from '../store/budgets'
 
 export class Budget extends Component {
   constructor(props) {
@@ -33,13 +33,9 @@ export class Budget extends Component {
       categoryId: this.state.categoryId,
       userId: this.props.userId,
     })
-    this.setState({
-      total: '',
-      categoryId: '',
-      userId: '',
-    })
+    this.props.renderCreateForm()
+    this.props.fetchBudgets(this.props.userId, 'monthly')
   }
-
   render() {
     const categories = this.props.categories
     return (
@@ -73,7 +69,9 @@ export class Budget extends Component {
         </div>
         <br />
         <br />
-        <button>Submit</button>
+        <button className="btn btn-success" onClick={this.renderCreateForm}>
+          Submit
+        </button>
       </form>
     )
   }
@@ -88,6 +86,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
+    fetchBudgets: (userId, period) => dispatch(fetchBudgets(userId, period)),
     postNewBudget: (newBudgetObj) => dispatch(postNewBudget(newBudgetObj)),
     fetchCategories: () => dispatch(fetchCategories()),
   }
