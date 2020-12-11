@@ -1,7 +1,6 @@
 'use strict'
 const db = require('../server/db')
 const {User, Category, Budget, Transaction} = require('../server/db/models')
-
 const users = [
   {
     firstName: 'Jessica',
@@ -28,7 +27,6 @@ const users = [
     password: '1234',
   },
 ]
-
 const categories = [
   {
     name: 'Groceries',
@@ -55,7 +53,6 @@ const categories = [
     imageUrl: 'https://www.flaticon.com/svg/static/icons/svg/3163/3163508.svg',
   },
 ]
-
 const budgets = [
   {
     total: 200,
@@ -114,7 +111,6 @@ const budgets = [
     categoryId: 5,
   },
 ]
-
 const transactions = [
   {
     amount: 50,
@@ -224,7 +220,7 @@ const transactions = [
   {
     amount: 74,
     storeName: 'Decorama Boutique',
-    date: '2020',
+    date: '2020-12-11',
     userId: 1,
     categoryId: 3,
   },
@@ -277,148 +273,36 @@ const transactions = [
     userId: 1,
     categoryId: 6,
   },
-  {
-    amount: 50.00,
-    storeName: 'Cornucopia',
-    date: '2020-09-15',
-    userId: 2,
-    categoryId: 3,
-  },
-  {
-    amount: 15.00,
-    storeName: 'The Full Cart',
-    date: '2020-10-15',
-    userId: 2,
-    categoryId: 4,
-  },
-  {
-    amount: 75.00,
-    storeName: 'One of a Kind Studio',
-    date: '2020-10-25',
-    userId: 2,
-    categoryId: 6,
-  },
-  {
-    amount: 6500.00,
-    storeName: 'Healthy Treats',
-    date: '2020-12-10',
-    userId: 2,
-    categoryId: 5,
-  },
-  {
-  amount: 65.00,
-    storeName: 'Sweet Spot',
-    date: '2020-12-10',
-    userId: 2,
-    categoryId: 2,
-  },
-  {
-    amount: 74.00,
-      storeName: 'Decorama Boutique',
-      date: '2020-05-11',
-      userId: 1,
-      categoryId: 3, 
-  }, 
-  {
-    amount: 74.00,
-      storeName: 'Farm to Shelf',
-      date: '2020-08-10',
-      userId: 5,
-      categoryId: 4, 
-  },  
-  {
-    amount: 40.00,
-      storeName: 'Spice Heaven',
-      date: '2019-08-10',
-      userId: 1,
-      categoryId: 3, 
-  },  
-  {
-    amount: 100.00,
-      storeName: 'Plentiful Online',
-      date: '2020-08-10',
-      userId: 2,
-      categoryId: 4, 
-  }, 
-  {
-    amount: 60.00,
-      storeName: 'Not Just Groceries',
-      date: '2020-05-10',
-      userId: 1,
-      categoryId: 5, 
-  }, 
-  {
-    amount: 75.00,
-      storeName: 'The Full Cart',
-      date: '2020-03-10',
-      userId: 2,
-      categoryId: 6, 
-  },   
-  {
-    amount: 100.00,
-      storeName: 'Etsy',
-      date: '2020-07-10',
-      userId: 2,
-      categoryId: 4, 
-  },                 
-  {
-    amount: 75.00,
-      storeName: 'WholeSome',
-      date: '2020-02-10',
-      userId: 1,
-      categoryId: 6, 
-  },  
-  {
-    amount: 100.00,
-      storeName: 'Farm to Shelf',
-      date: '2020-07-11',
-      userId: 2,
-      categoryId: 4, 
-  },  
-  {
-    amount: 70.00,
-      storeName: 'Green Organic',
-      date: '2020-07-10',
-      userId: 1,
-      categoryId: 5, 
-  },                    
 ]
-
 async function seed() {
   try {
     await db.sync({force: true})
     console.log('db synced!')
-
     await Promise.all(
       users.map((user) => {
         return User.create(user)
       })
     )
-
     await Promise.all(
       categories.map((category) => {
         return Category.create(category)
       })
     )
-
     await Promise.all(
       budgets.map((budget) => {
         return Budget.create(budget)
       })
     )
-
     await Promise.all(
       transactions.map((transaction) => {
         return Transaction.create(transaction)
       })
     )
-
     console.log(`seeded successfully`)
   } catch (err) {
     console.log(err)
   }
 }
-
 // We've separated the `seed` function from the `runSeed` function.
 // This way we can isolate the error handling and exit trapping.
 // The `seed` function is concerned only with modifying the database.
@@ -433,13 +317,11 @@ async function runSeed() {
     console.log('closing db connection')
   }
 }
-
 // Execute the `seed` function, IF we ran this module directly (`node seed`).
 // `Async` functions always return a promise, so we can use `catch` to handle
 // any errors that might occur inside of `seed`.
 if (module === require.main) {
   runSeed()
 }
-
 // we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed
