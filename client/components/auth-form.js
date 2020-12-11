@@ -38,10 +38,7 @@ const AuthForm = (props) => {
         </div>
         <br />
         <div>
-          <button
-            className="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
-            type="submit"
-          >
+          <button className="btn btn-success" type="submit">
             {displayName}
           </button>
         </div>

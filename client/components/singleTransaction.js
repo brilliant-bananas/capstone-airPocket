@@ -26,7 +26,6 @@ class SingleTransaction extends React.Component {
 
   async handleDelete(evt) {
     evt.preventDefault()
-    console.log('transaction to delete ID-->', this.props.id)
     await this.props.deleteTransaction(this.props.id)
     await this.props.getTransactions()
   }

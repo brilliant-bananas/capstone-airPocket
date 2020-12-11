@@ -22,12 +22,12 @@ class Categories extends React.Component {
   render() {
     return (
       <div>
-        <label>Select a Category:</label>
         <select
-          className="btn btn-info"
+          className="btn btn-primary"
           onChange={this.handleSelectChange}
           value={this.props.initialCategoryId}
         >
+          <option defaultValue="">Select Category</option>
           {this.props.categories.map((category) => (
             <option key={category.id} value={category.id}>
               {category.name}

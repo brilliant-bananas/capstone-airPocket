@@ -50,8 +50,6 @@ class Budgets extends React.Component {
     this.updateProgressBar(budgetInfo)
   }
   render() {
-    console.log('Budgets Props', this.props)
-
     let total = 0
     let spent = 0
     if (this.props.budgets.length > 0) {

@@ -159,20 +159,6 @@ const transactions = [
     categoryId: 2,
   },
   {
-    amount: 50,
-    storeName: 'Walmart',
-    date: '2020-12-12',
-    userId: 1,
-    categoryId: 2,
-  },
-  {
-    amount: 23,
-    storeName: 'Walmart',
-    date: '2020-12-07',
-    userId: 1,
-    categoryId: 2,
-  },
-  {
     amount: 31.5,
     storeName: 'Whole Foods',
     date: '2020-12-02',
@@ -290,20 +276,6 @@ const transactions = [
     date: '2020-11-14',
     userId: 1,
     categoryId: 6,
-  },
-  {
-    amount: 19,
-    storeName: 'Farm to Shelf',
-    date: '2020-12-03',
-    userId: 2,
-    categoryId: 4,
-  },
-  {
-    amount: 37,
-    storeName: 'Green Organic',
-    date: '2020-11-22',
-    userId: 1,
-    categoryId: 5,
   },
 ]
 

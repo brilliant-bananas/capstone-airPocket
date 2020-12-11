@@ -25,7 +25,6 @@ export default class BudgetForm extends React.Component {
   }
 
   render() {
-    console.log('Budget Form Props', this.props)
     return (
       <div>
         <form id="budget-form" onSubmit={this.handleSubmit}>

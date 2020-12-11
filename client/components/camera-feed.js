@@ -8,7 +8,7 @@ export default class CameraFeed extends Component {
     super(props)
     this.state = {
       file: null,
-      categoryId: 1,
+      categoryId: '',
       showModal: false,
     }
     this.onFormSubmit = this.onFormSubmit.bind(this)
@@ -118,18 +118,20 @@ export default class CameraFeed extends Component {
           <h3>Receipt Upload</h3>
           <input type="file" name="myImage" onChange={this.onChange} />
 
-          <button type="submit">Upload</button>
+          <button className="btn btn-success" type="submit">
+            Upload
+          </button>
         </form>
         <Modal
           show={this.state.showModal}
           onHide={() => this.setState({showModal: false})}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Processing</Modal.Title>
+            <Modal.Title>Processing..</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Processing your receipt...</h4>
-            <Spinner animation="border" variant="info" />
+            <h4>Processing your receipt and saving data...</h4>
+            <Spinner animation="border" variant="success" />
           </Modal.Body>
         </Modal>
       </div>
