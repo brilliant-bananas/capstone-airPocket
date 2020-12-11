@@ -41,7 +41,7 @@ router.get('/:budgetId', async (req, res, next) => {
     next(error)
   }
 })
-
+//PUT /api/budgets
 router.put('/:budgetId', async (req, res, next) => {
   try {
     const updatedBudget = await Budget.findByPk(req.params.budgetId)
