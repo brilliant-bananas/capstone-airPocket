@@ -1,13 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-
 import {fetchCategories} from '../store/categories'
+import NewCategory from './createCategory'
 import SingleCategory from './singleCategory'
 
 export class AllCategories extends Component {
   constructor(props) {
     super(props)
-    
   }
 
   componentDidMount() {
@@ -17,16 +16,23 @@ export class AllCategories extends Component {
   render() {
     const categories = this.props.categories
     return (
-        <div id = "all-categories">
-          {categories.map((category) => (
-            <div key={category.id}>
-                <h3>{category.name}</h3>
-               <SingleCategory id={category.id} name={category.name} 
-               fetchCategories={this.props.fetchCategories}/>
-              
-           </div>  
+      <div id="all-categories">
+        <h3>Manage Categories</h3>
+        {categories.map((category) => (
+          <div key={category.id}>
+            <SingleCategory
+              id={category.id}
+              name={category.name}
+              imageUrl={category.imageUrl}
+              fetchCategories={this.props.fetchCategories}
+            />
+          </div>
         ))}
-     </div>
+        <hr />
+        <div>
+          <NewCategory />
+        </div>
+      </div>
     )
   }
 }
@@ -40,7 +46,6 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchCategories: () => dispatch(fetchCategories()),
-    
   }
 }
 

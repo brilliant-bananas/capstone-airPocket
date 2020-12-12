@@ -3,14 +3,11 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
-import HomePage from './components/home-page'
 import {me} from './store'
 import Camera from './components/camera'
 import AllTransactions from './components/allTransactions'
 import Budgets from './components/budgets'
-import Budget from './components/budget'
-import CreateCategory from './components/createCategory'
-import AllCategories  from './components/allCategories'
+import AllCategories from './components/allCategories'
 
 /**
  * COMPONENT
@@ -29,17 +26,15 @@ class Routes extends Component {
         {/* <Route exact path="/" component={UserHome} /> */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        
-         {isLoggedIn && (
+
+        {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
             <Route path="/camera" component={Camera} />
             <Route path="/transactions" component={AllTransactions} />
             <Route path="/budgets" component={Budgets} />
-            <Route path="/budget" component={Budget} />
-            <Route path="/createCategories" component={CreateCategory} />
-            <Route path="/allCategories" component={AllCategories} />
+            <Route path="/categories" component={AllCategories} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
