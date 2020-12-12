@@ -35,13 +35,10 @@ export const fetchBudgets = (userId, period) => {
 export const updateBudget = (budgetId, budgetInfo) => {
   return async (dispatch) => {
     try {
-      console.log('IN THUNK', budgetId)
-      console.log(budgetInfo)
       const {data: budget} = await axios.put(
         `/api/budgets/${budgetId}`,
         budgetInfo
       )
-      console.log('new budget', budget)
       dispatch(updatedBudget(budget))
     } catch (error) {
       console.error('Error updating budget from api')

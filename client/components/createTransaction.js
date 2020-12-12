@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchTransactions, createNewTransaction} from '../store/transaction'
 import {fetchCategories} from '../store/categories'
+import {Link, withRouter} from 'react-router-dom'
 
 class NewTransForm extends React.Component {
   constructor(props) {
@@ -23,7 +24,6 @@ class NewTransForm extends React.Component {
       console.log(error)
     }
   }
-
   handleChange(evt) {
     this.setState({
       [evt.target.name]: evt.target.value,
@@ -32,7 +32,6 @@ class NewTransForm extends React.Component {
 
   async handleSubmit(evt) {
     evt.preventDefault()
-    console.log('categoryId after being selected-->', this.state.categoryId)
     await this.props.newTransaction(
       this.state.storeName,
       this.state.amount,
@@ -41,6 +40,7 @@ class NewTransForm extends React.Component {
     )
     await this.props.getTransactions()
     this.setState({storeName: '', amount: 0, date: '', categoryId: ''})
+    this.props.history.push(`/transactions`)
   }
 
   render() {
@@ -94,9 +94,11 @@ class NewTransForm extends React.Component {
           <br />
 
           <br />
+          {/* <Link to="/transactions"> */}
           <button className="btn btn-success" type="submit">
             Confirm Changes
           </button>
+          {/* </Link> */}
         </form>
       </div>
     )
@@ -115,4 +117,4 @@ const mapDispatch = (dispatch) => ({
   fetchCategories: () => dispatch(fetchCategories()),
 })
 
-export default connect(mapState, mapDispatch)(NewTransForm)
+export default withRouter(connect(mapState, mapDispatch)(NewTransForm))

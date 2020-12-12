@@ -87,10 +87,6 @@ router.post('/upload', upload.single('photo'), async (req, res, next) => {
       await worker.terminate()
       const userId = req.user.id
       if (storeName !== '' && amount > 0) {
-        console.log('Store name:', storeName)
-        console.log('amount', amount)
-        console.log('userId-->', userId)
-
         const categoryId = req.body.categoryId
         const newTransaction = await Transaction.create({
           amount,
