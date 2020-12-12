@@ -6,8 +6,8 @@ export default class DonutChart extends React.Component {
     super(props)
     const dataArr = this.getMonthlyTotal()
     this.state = {
-      width: 450,
-      height: 450,
+      width: 360,
+      height: 280,
       innerRadius: 75,
       outerRadius: 140,
     }
@@ -38,7 +38,7 @@ export default class DonutChart extends React.Component {
 
     const group = svg
       .append('g')
-      .attr('transform', `translate(${outerRadius} ${outerRadius})`)
+      .attr('transform', `translate(${outerRadius + 30} ${outerRadius})`)
 
     const groupWithEnter = group.selectAll('g.arc').data(data).enter()
 
@@ -128,6 +128,17 @@ export default class DonutChart extends React.Component {
   }
 
   render() {
-    return <svg ref={this.ref} />
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginBottom: '24px',
+          marginTop: '32px',
+        }}
+      >
+        <svg ref={this.ref} className="donut-chart" />
+      </div>
+    )
   }
 }

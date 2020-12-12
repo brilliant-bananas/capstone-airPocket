@@ -37,8 +37,6 @@ form div {
   left: calc(50% - 50px);
 }
 
-
-
 .homepage-image h1 {
   font-size: 50px;
 }
@@ -88,4 +86,20 @@ form div {
   width: 100%;
 }
 
+.category-container {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+}
 
+.category-icon {
+  margin-right: 10px;
+}
+
+.category-edit-button {
+  margin-left: auto;
+}
+
+.category-add {
+  margin-top: 32px;
+}

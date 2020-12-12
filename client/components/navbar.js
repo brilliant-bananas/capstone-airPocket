@@ -11,26 +11,29 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         <div>
           {/* The navbar will show these links after you log in */}
           <Link to="/home">
-            <img src="/icons/home.png" width="35" height="35" />
+            <img src="/icons/home.png" width="30" height="30" />
           </Link>
           <Link to="/budgets">
-            <img src="/icons/budget.png" width="40" height="40" />
+            <img src="/icons/budget.png" width="30" height="30" />
           </Link>
           <Link to="/transactions">
-            <img src="/icons/transactions.png" width="40" height="40" />
+            <img src="/icons/transactions.png" width="30" height="30" />
+          </Link>
+          <Link to="/categories">
+            <img src="/icons/category.png" width="30" height="30" />
           </Link>
           <a href="#" onClick={handleClick}>
-            <img src="/icons/logout.png" width="35" height="35" />
+            <img src="/icons/logout.png" width="30" height="30" />
           </a>
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
           <Link to="/login">
-            <img src="/icons/log-in.png" width="35" height="35" />
+            <img src="/icons/log-in.png" width="30" height="30" />
           </Link>
           <Link to="/signup">
-            <img src="/icons/sign-up.png" width="40" height="40" />
+            <img src="/icons/sign-up.png" width="30" height="30" />
           </Link>
         </div>
       )}

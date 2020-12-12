@@ -29,6 +29,7 @@ export const fetchOneTransaction = (transactionId) => {
       const {data: transaction} = await axios.get(
         `/api/transactions/${transactionId}`
       )
+      debugger
       dispatch(setOneTransaction(transaction))
     } catch (err) {
       console.error('Oops, the transaction seems to fail to get loaded', err)

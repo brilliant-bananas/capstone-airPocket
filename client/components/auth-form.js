@@ -17,7 +17,7 @@ const AuthForm = (props) => {
       >
         <p className="h4 mb-4">Air Pocket</p>
         <p className="h4 mb-4">
-          <img src="/icons/logo.png" width="75" height="75" />
+          <img src="/icons/logo.png" width="100" height="100" />
         </p>
         <div className="md-form">
           <label htmlFor="email">

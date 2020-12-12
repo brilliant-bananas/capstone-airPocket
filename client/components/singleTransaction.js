@@ -11,9 +11,11 @@ class SingleTransaction extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isEdit: false,
+      renderUpdateForm: false,
     }
     this.handleDelete = this.handleDelete.bind(this)
+    this.renderUpdateForm = this.renderUpdateForm.bind(this)
+    this.callUpdateAction = this.callUpdateAction.bind(this)
   }
 
   componentDidMount() {
@@ -24,6 +26,18 @@ class SingleTransaction extends React.Component {
     }
   }
 
+  renderUpdateForm() {
+    this.setState({
+      renderUpdateForm: !this.state.renderUpdateForm,
+    })
+  }
+
+  callUpdateAction(id, transationInfo) {
+    debugger
+    this.renderUpdateForm()
+    this.props.updateTransaction(id, transationInfo)
+  }
+
   async handleDelete(evt) {
     evt.preventDefault()
     await this.props.deleteTransaction(this.props.id)
@@ -31,49 +45,48 @@ class SingleTransaction extends React.Component {
   }
 
   render() {
-    let {storeName, amount, date = ''} = this.props.transaction
+    let {storeName, amount, date = '', category} = this.props.transaction
     const id = this.props.id
-    const {isEdit} = this.state
+    const {renderUpdateForm} = this.state
+    const imgUrl = category.imageUrl
 
     return (
       <div id="transaction-container">
         <div>
-          <div>
-            <h4>
+          <div style={{display: 'flex', alignItems: 'center'}}>
+            <img src={`${imgUrl}`} width="35" height="35" />
+            <h4 style={{margin: 0, marginLeft: '10px'}}>
               <b>{storeName}</b>
             </h4>
-            <p>
-              ${amount} Transaction Date: {''}
-              {date}
-            </p>
-            <button
-              className="btn btn-warning"
-              type="button"
-              onClick={() => {
-                this.setState({isEdit: !this.state.isEdit})
-              }}
-            >
-              Edit
-            </button>{' '}
-            <button
-              className="btn btn-danger"
-              type="button"
-              onClick={this.handleDelete}
-            >
-              Delete
-            </button>
-            <hr className="solid" />
           </div>
+          <p>
+            ${amount} Transaction Date: {''}
+            {date}
+          </p>
+          <button
+            className="btn btn-warning"
+            type="button"
+            onClick={this.renderUpdateForm}
+          >
+            Edit
+          </button>{' '}
+          <button
+            className="btn btn-danger"
+            type="button"
+            onClick={this.handleDelete}
+          >
+            Delete
+          </button>
+          <hr className="solid" />
         </div>
-        {isEdit && (
+        {renderUpdateForm && (
           <div>
             <TransForm
               key={id}
               id={id}
-              isEdit={this.state.isEdit}
               transaction={this.props.transaction}
               categories={this.props.categories}
-              updateTransaction={this.props.updateTransaction}
+              callUpdateAction={this.callUpdateAction}
               getTransactions={this.props.getTransactions}
             />
           </div>

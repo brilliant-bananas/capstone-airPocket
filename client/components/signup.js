@@ -18,7 +18,7 @@ const SignUp = (props) => {
       >
         <p className="h4 mb-4">Air Pocket</p>
         <p className="h4 mb-4">
-          <img src="/icons/logo.png" width="30" height="30" />
+          <img src="/icons/logo.png" width="100" height="100" />
         </p>
 
         <div>

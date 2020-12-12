@@ -1,22 +1,24 @@
 import axios from 'axios'
 //action type
 const GET_CATEGORIES = 'GET_CATEGORIES'
-const UPDATE_CATEGORY = "UPDATE_CATEGORY"
+const UPDATE_CATEGORY = 'UPDATE_CATEGORY'
+const DELETE_CATEGORY = 'DELETE_CATEGORY'
 
 //action creator
-const getCategories = categories => ({
+const getCategories = (categories) => ({
   type: GET_CATEGORIES,
-  categories
+  categories,
 })
 
 const setUpdatedCategory = (updatedCategory) => {
   return {
-    type:UPDATE_CATEGORY,
+    type: UPDATE_CATEGORY,
     updatedCategory,
   }
 }
+
 export const fetchCategories = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const {data: categories} = await axios.get('/api/categories')
       dispatch(getCategories(categories))
@@ -26,21 +28,21 @@ export const fetchCategories = () => {
   }
 }
 
-export const updatedSingleCategory = (categoryInfo)  => {
-    return async (dispatch) => {
-      try {
-        const { id, name } = categoryInfo
-        console.log("The category info for updated category:", { name: name });
-        const { data: updatedCategory } = await axios.put(
-          `/api/categories/${id}`, 
-          categoryInfo
-        );
-        console.log("the updated items are", updatedCategory)
-        dispatch(setUpdatedCategory(updatedCategory))
-      } catch (error) {
-        console.log("Error updating category")
-      }
+export const updatedSingleCategory = (categoryInfo) => {
+  return async (dispatch) => {
+    try {
+      const {id, name} = categoryInfo
+      console.log('The category info for updated category:', {name: name})
+      const {data: updatedCategory} = await axios.put(
+        `/api/categories/${id}`,
+        categoryInfo
+      )
+      console.log('the updated items are', updatedCategory)
+      dispatch(setUpdatedCategory(updatedCategory))
+    } catch (error) {
+      console.log('Error updating category')
     }
+  }
 }
 
 const initialState = []
