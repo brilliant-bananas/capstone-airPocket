@@ -37,7 +37,7 @@ export default class BudgetForm extends React.Component {
               placeholder={this.props.budget.total}
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-success">
             Submit
           </button>
         </form>

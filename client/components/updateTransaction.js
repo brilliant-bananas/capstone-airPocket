@@ -20,7 +20,6 @@ class TransForm extends React.Component {
   }
 
   async handleSubmit(evt) {
-    console.log('this.props.id', this.props.id)
     evt.preventDefault()
     await this.props.updateTransaction(this.props.id, this.state)
     await this.props.getTransactions()
@@ -73,7 +72,9 @@ class TransForm extends React.Component {
             </select>
           </div>
           <br />
-          <button type="submit">Confirm Changes</button>
+          <button type="submit" className="btn btn-success">
+            Confirm Changes
+          </button>
         </form>
       </div>
     )

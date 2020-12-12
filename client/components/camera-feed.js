@@ -10,24 +10,54 @@ export default class CameraFeed extends Component {
       file: null,
       categoryId: '',
       showModal: false,
+      modalTitle: 'Processing...',
+      modalBody: 'Processing your receipt and saving data...',
+      showSpinner: true,
     }
+    this.getImageBlobFromCanvas = this.getImageBlobFromCanvas.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
     this.onCategoryChange = this.onCategoryChange.bind(this)
+    this.renderModal = this.renderModal.bind(this)
+    this.changeModalMessage = this.changeModalMessage.bind(this)
+    this.resetModalMessage = this.resetModalMessage.bind(this)
+  }
+
+  getImageBlobFromCanvas(canvas) {
+    return new Promise(function (resolve, reject) {
+      canvas.toBlob(function (blob) {
+        resolve(blob)
+      })
+    })
+  }
+
+  resetModalMessage() {
+    this.setState({
+      modalTitle: 'Processing...',
+      modalBody: 'Processing your receipt and saving data...',
+      showSpinner: true,
+    })
+  }
+
+  renderModal() {
+    this.resetModalMessage()
+    this.setState({showModal: !this.state.showModal})
+  }
+
+  changeModalMessage(title, body) {
+    this.setState({modalTitle: title, modalBody: body, showSpinner: false})
   }
 
   // uploading photo
   async onFormSubmit(e) {
     e.preventDefault()
-    this.setState({
-      showModal: true,
-    })
-
-    await this.props.uploadImageFromForm(this.state.file, this.state.categoryId)
-
-    this.setState({
-      showModal: false,
-    })
+    this.renderModal()
+    await this.props.uploadImageFromForm(
+      this.state.file,
+      this.state.categoryId,
+      this.renderModal,
+      this.changeModalMessage
+    )
   }
 
   onChange(e) {
@@ -77,11 +107,18 @@ export default class CameraFeed extends Component {
    * @memberof CameraFeed
    * @instance
    */
-  takePhoto = () => {
+  takePhoto = async () => {
     const context = this.canvas.getContext('2d')
     //getImagen from canvas
     context.drawImage(this.videoPlayer, 0, 0, 680, 360)
-    this.canvas.toBlob(this.props.uploadImageFromCamera, this.state.categoryId)
+    this.renderModal()
+    let imageBlob = await this.getImageBlobFromCanvas(this.canvas)
+    this.props.uploadImageFromCamera(
+      imageBlob,
+      this.state.categoryId,
+      this.renderModal,
+      this.changeModalMessage
+    )
   }
 
   onCategoryChange = (categoryId) => {
@@ -98,19 +135,19 @@ export default class CameraFeed extends Component {
         <div className="c-camera-feed__viewer">
           <video
             ref={(ref) => (this.videoPlayer = ref)}
-            width="400"
-            heigh="150"
+            width="80%"
+            height="80%"
           />
         </div>
 
         <button className="btn btn-warning" onClick={this.takePhoto}>
           Take photo!
         </button>
-        <div className="c-camera-feed__stage">
+        <div className="c-camera-feed__stage" style={{display: 'none'}}>
           <canvas
             id="image"
-            width="400"
-            heigh="150"
+            width="300"
+            height="150"
             ref={(ref) => (this.canvas = ref)}
           />
         </div>
@@ -127,11 +164,13 @@ export default class CameraFeed extends Component {
           onHide={() => this.setState({showModal: false})}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Processing..</Modal.Title>
+            <Modal.Title>{this.state.modalTitle}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Processing your receipt and saving data...</h4>
-            <Spinner animation="border" variant="success" />
+            <h4>{this.state.modalBody}</h4>
+            {this.state.showSpinner && (
+              <Spinner animation="border" variant="success" />
+            )}
           </Modal.Body>
         </Modal>
       </div>
