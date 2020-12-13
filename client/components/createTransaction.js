@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchTransactions, createNewTransaction} from '../store/transaction'
 import {fetchCategories} from '../store/categories'
-import {Link, withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 class NewTransForm extends React.Component {
   constructor(props) {
@@ -94,11 +94,9 @@ class NewTransForm extends React.Component {
           <br />
 
           <br />
-          {/* <Link to="/transactions"> */}
           <button className="btn btn-success" type="submit">
-            Confirm Changes
+            Submit
           </button>
-          {/* </Link> */}
         </form>
       </div>
     )

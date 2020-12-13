@@ -17,10 +17,12 @@ export class AllCategories extends Component {
     const categories = this.props.categories
     return (
       <div id="all-categories">
-        <h3>Manage Categories</h3>
-        <Link to="/createCategory">
-          <button className="btn btn-success">+</button>
-        </Link>
+        <h3>
+          Manage Categories{' '}
+          <Link to="/createCategory">
+            <button className="btn btn-success">+</button>
+          </Link>
+        </h3>
         {categories.map((category) => (
           <div key={category.id}>
             <SingleCategory

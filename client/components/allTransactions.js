@@ -13,12 +13,12 @@ class Transactions extends React.Component {
     return (
       <div className="container">
         <div className="items">
-          <h1 className="center">
+          <h3 className="center">
             All Transactions{' '}
             <Link to="/camera">
               <button className="btn btn-success">+</button>
             </Link>
-          </h1>
+          </h3>
           <ol className="allTransactions">
             {transactions.map((transaction) => (
               <SingleTransaction

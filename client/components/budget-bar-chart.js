@@ -152,8 +152,9 @@ export default class BarChart extends Component {
         {this.props.showButtons && (
           <div id="budgetButtons">
             <button
-              type="button"
               className="btn btn-warning"
+              type="button"
+              style={{marginLeft: 'auto'}}
               onClick={this.renderUpdateForm}
             >
               Edit

@@ -34,16 +34,17 @@ export class UpdateCategoryForm extends Component {
   render() {
     return (
       <div className="form-container">
-        <form id="form" onSubmit={this.handleSubmit}>
-          <label htmlFor="name">
-            name
-            <input
-              type="text"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
+        <form id="form" style={{display: 'flex'}} onSubmit={this.handleSubmit}>
+          <label htmlFor="name" style={{display: 'none'}}>
+            Category Name
           </label>
+          <input
+            style={{marginRight: '10px'}}
+            type="text"
+            name="name"
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
 
           <button
             className="btn btn-success"
@@ -52,7 +53,7 @@ export class UpdateCategoryForm extends Component {
               this.setState({updateChanges: !this.state.updateChanges})
             }
           >
-            Submit Changes
+            Submit
           </button>
         </form>
       </div>
