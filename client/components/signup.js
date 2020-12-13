@@ -22,41 +22,47 @@ const SignUp = (props) => {
         </p>
 
         <div>
-          <label htmlFor="firstName">
-            <small>First Name</small>
-          </label>
-          <input className="form-control" name="firstName" required />
-        </div>
-
-        <div>
-          <label htmlFor="lastName">
-            <small>Last Name</small>
-          </label>
-          <input className="form-control" name="lastName" required />
-        </div>
-
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input className="form-control" name="email" type="email" required />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
+          <label htmlFor="firstName"></label>
           <input
             className="form-control"
-            name="password"
-            type="password"
+            name="firstName"
+            placeholder="First Name"
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="lastName"></label>
+          <input
+            className="form-control"
+            name="lastName"
+            placeholder="Last Name"
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="email"></label>
+          <input
+            className="form-control"
+            name="email"
+            type="email"
+            placeholder="Email"
             required
           />
         </div>
         <div>
-          <button
-            className="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
-            type="submit"
-          >
+          <label htmlFor="password"></label>
+          <input
+            className="form-control"
+            name="password"
+            type="password"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <div>
+          <button className="btn btn-success" type="submit">
             {displayName}
           </button>
         </div>

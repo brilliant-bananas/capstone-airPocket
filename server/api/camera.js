@@ -46,7 +46,6 @@ router.post('/upload', upload.single('photo'), async (req, res, next) => {
 
       //getting total and name of the place
       const data = `${text}`
-
       if (data == undefined || data.length <= 0) {
         res.sendStatus(400, 'ERROR: Could not read receipt!')
       }
@@ -113,7 +112,6 @@ router.post('/upload', upload.single('photo'), async (req, res, next) => {
             }
           )
         }
-
         res.send(newTransaction)
       } else {
         res.sendStatus(400, 'Could not read data from receipt!')
