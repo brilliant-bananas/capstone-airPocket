@@ -2,7 +2,26 @@ import axios from 'axios'
 //action type
 const GET_CATEGORIES = 'GET_CATEGORIES'
 const UPDATE_CATEGORY = 'UPDATE_CATEGORY'
-const DELETE_CATEGORY = 'DELETE_CATEGORY'
+const ADD_CATEGORY = 'ADD_CATEGORY'
+
+//action creator for Add category
+const addCategory = (category) => ({
+  type: ADD_CATEGORY,
+  category,
+})
+
+export const addCategoryThunk = (name) => {
+  return async (dispatch) => {
+    try {
+      const {data: newCategory} = await axios.post('/api/categories', {
+        name: name,
+      })
+      dispatch(addCategory(newCategory))
+    } catch (error) {
+      console.error('Error adding categories from api')
+    }
+  }
+}
 
 //action creator
 const getCategories = (categories) => ({
@@ -37,7 +56,6 @@ export const updatedSingleCategory = (categoryInfo) => {
         `/api/categories/${id}`,
         categoryInfo
       )
-      console.log('the updated items are', updatedCategory)
       dispatch(setUpdatedCategory(updatedCategory))
     } catch (error) {
       console.log('Error updating category')
@@ -50,6 +68,8 @@ export default function categories(state = initialState, action) {
   switch (action.type) {
     case GET_CATEGORIES:
       return action.categories
+    case ADD_CATEGORY:
+      return [...state, action.category]
     default:
       return state
   }

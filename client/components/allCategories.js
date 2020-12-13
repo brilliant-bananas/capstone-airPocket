@@ -28,7 +28,7 @@ export class AllCategories extends Component {
             />
           </div>
         ))}
-        <hr />
+
         <div>
           <NewCategory />
         </div>
