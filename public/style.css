@@ -1,10 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-}
-
-body {
-  font-family: Impact, fantasy;
+  font-family: 'Raleway', sans-serif;
 }
 
 a {
@@ -99,4 +96,23 @@ form div {
 
 .category-add {
   margin-top: 32px;
+}
+
+.app-navbar {
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.app-container {
+  padding-top: 16px;
+}
+
+b,
+strong {
+  font-weight: bolder;
+  font-size: 24px;
 }

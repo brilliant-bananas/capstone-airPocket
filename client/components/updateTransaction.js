@@ -73,7 +73,7 @@ class TransForm extends React.Component {
           </div>
           <br />
           <button type="submit" className="btn btn-success">
-            Confirm Changes
+            Submit
           </button>
         </form>
       </div>

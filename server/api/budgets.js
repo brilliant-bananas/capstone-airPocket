@@ -73,7 +73,6 @@ router.delete('/:budgetId', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const {total, userId, categoryId} = req.body
-    console.log('req.body', req.body)
     const newBudget = await Budget.create({
       total,
       userId,

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addCategoryThunk} from '../store/categories'
+import {addCategoryThunk, fetchCategories} from '../store/categories'
+import {withRouter} from 'react-router-dom'
 
 class NewCategory extends Component {
   constructor() {
@@ -24,6 +25,7 @@ class NewCategory extends Component {
       name: '',
     })
     await this.props.fetchCategories()
+    this.props.history.push(`/categories`)
   }
 
   render() {
@@ -35,23 +37,23 @@ class NewCategory extends Component {
             <input
               type="text"
               name="name"
-              placeholder="Category"
+              placeholder="Category Name"
               aria-label="Name"
               aria-describedby="basic-addon1"
-              value={this.state.category}
+              value={this.state.name}
               onChange={this.handleChange}
             ></input>
           </div>
         </div>
         <br />
         <div className="row">
-          <div className="col-md-4 col-lg-4">
+          <div className="col-md-4">
             <button
-              type="button"
-              className="btn btn-primary btn-block"
+              className="btn btn-success"
+              type="submit"
               onClick={this.handleSubmit}
             >
-              Add
+              Submit
             </button>
           </div>
         </div>
@@ -63,7 +65,8 @@ class NewCategory extends Component {
 const mapDispatch = (dispatch) => {
   return {
     addCategoryThunk: (name) => dispatch(addCategoryThunk(name)),
+    fetchCategories: () => dispatch(fetchCategories()),
   }
 }
 
-export default connect(null, mapDispatch)(NewCategory)
+export default withRouter(connect(null, mapDispatch)(NewCategory))

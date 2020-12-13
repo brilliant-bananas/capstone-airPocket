@@ -25,35 +25,40 @@ export class SingleCategory extends Component {
   }
 
   render() {
-    console.log('edit state is', this.state.isEdit)
-    const {name, id, imageUrl, fetchCategories} = this.props
-    console.log('this is name in singleCategory', name)
+    const {name, id, imageUrl} = this.props
     return (
-      <div className="category-container">
-        <img
-          className="category-icon"
-          src={`${imageUrl}`}
-          width="35"
-          height="35"
-        />{' '}
-        <b>{name}</b>
-        <button
-          className="btn btn-warning"
-          onClick={this.renderUpdateForm}
-          type="submit"
+      <>
+        <div
+          className="category-container container"
+          style={{fontsize: '24px'}}
         >
-          Edit
-        </button>{' '}
-        <hr className="solid" />
+          <img
+            className="category-icon"
+            src={`${imageUrl}`}
+            width="35"
+            height="35"
+          />{' '}
+          <b>{name}</b>
+          <button
+            style={{marginLeft: 'auto'}}
+            className="btn btn-warning"
+            onClick={this.renderUpdateForm}
+            type="submit"
+          >
+            Edit
+          </button>{' '}
+        </div>
         {this.state.renderUpdateForm && (
-          <UpDateCategoryForm
-            name={name}
-            id={id}
-            callUpdateAction={this.callUpdateAction}
-            fetchCategories={fetchCategories}
-          />
+          <div>
+            <UpDateCategoryForm
+              name={name}
+              id={id}
+              callUpdateAction={this.callUpdateAction}
+            />
+          </div>
         )}
-      </div>
+        <hr className="solid" />
+      </>
     )
   }
 }

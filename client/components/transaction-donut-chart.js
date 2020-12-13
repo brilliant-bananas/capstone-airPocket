@@ -7,9 +7,9 @@ export default class DonutChart extends React.Component {
     const dataArr = this.getMonthlyTotal()
     this.state = {
       width: 360,
-      height: 280,
-      innerRadius: 75,
-      outerRadius: 140,
+      height: 360,
+      innerRadius: 70,
+      outerRadius: 120,
     }
     this.ref = createRef()
     this.createPie = d3
@@ -38,7 +38,7 @@ export default class DonutChart extends React.Component {
 
     const group = svg
       .append('g')
-      .attr('transform', `translate(${outerRadius + 30} ${outerRadius})`)
+      .attr('transform', `translate(${outerRadius + 60} ${outerRadius + 30})`)
 
     const groupWithEnter = group.selectAll('g.arc').data(data).enter()
 
@@ -54,7 +54,6 @@ export default class DonutChart extends React.Component {
       .append('text')
       .attr('text-anchor', 'middle')
       .attr('alignment-baseline', 'middle')
-      .attr('transform', (d) => `translate(${this.createArc.centroid(d)})`)
       .style('fill', 'black')
       .style('font-size', 10)
       .text((d) => {
@@ -71,7 +70,6 @@ export default class DonutChart extends React.Component {
       let month = parseInt(dateArr[1])
       return month === monthNum
     })
-    console.log('monthlyTransacts-->', monthlyTransacts)
     const costPerCategory = {}
     for (let i = 0; i < monthlyTransacts.length; i++) {
       let category = monthlyTransacts[i].category.name
@@ -82,7 +80,6 @@ export default class DonutChart extends React.Component {
         costPerCategory[category] = costPerTrans
       }
     }
-    console.log('monthly cost under different categories-->', costPerCategory)
 
     const dataArr = []
     for (let [key, value] of Object.entries(costPerCategory)) {
@@ -120,10 +117,13 @@ export default class DonutChart extends React.Component {
     text
       .attr('text-anchor', 'middle')
       .attr('alignment-baseline', 'middle')
-      .attr('transform', (d) => `translate(${this.createArc.centroid(d)})`)
+      .attr('transform', (d) => {
+        let centroid = this.createArc.centroid(d)
+        return `translate(${centroid[0] * 1.2}, ${centroid[1] * 1.2})`
+      })
       // .text((d) => this.format())
       .text((d) => {
-        return `${d.data.category} - $${this.format(parseInt(d.data.cost))}`
+        return `${d.data.category}: $${this.format(parseInt(d.data.cost))}`
       })
   }
 

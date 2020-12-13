@@ -31,8 +31,6 @@ class UserHome extends React.Component {
     }
   }
   render() {
-    console.log('User home Props', this.props)
-
     let total = 0
     let remaining = 0
     let spent = 0
