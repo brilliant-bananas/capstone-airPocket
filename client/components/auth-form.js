@@ -20,17 +20,20 @@ const AuthForm = (props) => {
           <img src="/icons/logo.png" width="100" height="100" />
         </p>
         <div className="md-form">
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input className="form-control" name="email" type="email" required />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
+          <label htmlFor="email"></label>
           <input
             className="form-control"
+            placeholder="Email"
+            name="email"
+            type="email"
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="password"></label>
+          <input
+            className="form-control"
+            placeholder="Password"
             name="password"
             type="password"
             required

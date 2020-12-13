@@ -38,12 +38,13 @@ export class SingleCategory extends Component {
         />{' '}
         <b>{name}</b>
         <button
-          className="category-edit-button btn btn-warning"
+          className="btn btn-warning"
           onClick={this.renderUpdateForm}
           type="submit"
         >
           Edit
         </button>{' '}
+        <hr className="solid" />
         {this.state.renderUpdateForm && (
           <UpDateCategoryForm
             name={name}

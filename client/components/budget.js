@@ -39,19 +39,7 @@ export class Budget extends Component {
   render() {
     const categories = this.props.categories
     return (
-      <form id="form" onSubmit={this.handleSubmit}>
-        <label htmlFor="total">
-          Budget Amount:
-          <input
-            type="text"
-            name="total"
-            value={this.state.total}
-            onChange={this.handleChange}
-          />
-        </label>
-
-        <br />
-
+      <form onSubmit={this.handleSubmit}>
         <div id="categories">
           <select
             className="btn btn-primary"
@@ -69,6 +57,15 @@ export class Budget extends Component {
         </div>
         <br />
         <br />
+        <label htmlFor="total">
+          <input
+            type="text"
+            name="total"
+            placeholder="Amount"
+            value={this.state.total}
+            onChange={this.handleChange}
+          />
+        </label>
         <button className="btn btn-success" onClick={this.renderCreateForm}>
           Submit
         </button>

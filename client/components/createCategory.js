@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import axios from 'axios'
+import {connect} from 'react-redux'
+import {addCategoryThunk} from '../store/categories'
 
 class NewCategory extends Component {
   constructor() {
@@ -7,7 +8,6 @@ class NewCategory extends Component {
     this.state = {
       name: '',
     }
-
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
@@ -18,18 +18,12 @@ class NewCategory extends Component {
     })
   }
   async handleSubmit(event) {
-    console.log('the state of category is', this.state.name)
     event.preventDefault()
-    try {
-      await axios.post('/api/categories', {
-        name: this.state.name,
-      })
-      this.setState({
-        name: '',
-      })
-    } catch (error) {
-      console.error('Error Adding category')
-    }
+    await this.props.addCategoryThunk(this.state.name)
+    this.setState({
+      name: '',
+    })
+    await this.props.fetchCategories()
   }
 
   render() {
@@ -41,7 +35,6 @@ class NewCategory extends Component {
             <input
               type="text"
               name="name"
-              className="form-control"
               placeholder="Category"
               aria-label="Name"
               aria-describedby="basic-addon1"
@@ -67,4 +60,10 @@ class NewCategory extends Component {
   }
 }
 
-export default NewCategory
+const mapDispatch = (dispatch) => {
+  return {
+    addCategoryThunk: (name) => dispatch(addCategoryThunk(name)),
+  }
+}
+
+export default connect(null, mapDispatch)(NewCategory)

@@ -47,12 +47,13 @@ export class UpdateCategoryForm extends Component {
           </label>
 
           <button
+            className="btn btn-success"
             type="submit"
             onClick={() =>
               this.setState({updateChanges: !this.state.updateChanges})
             }
           >
-            Update Category
+            Submit Changes
           </button>
         </form>
       </div>
