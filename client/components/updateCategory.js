@@ -19,7 +19,6 @@ export class UpdateCategoryForm extends Component {
   }
 
   async handleSubmit(event) {
-    console.log('values are', this.state.name, this.state.id)
     event.preventDefault()
     await this.props.callUpdateAction({
       name: this.state.name,

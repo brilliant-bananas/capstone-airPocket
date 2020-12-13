@@ -20,7 +20,6 @@ class Budgets extends React.Component {
   }
 
   async updateAction(budgetId, budgetInfo) {
-    console.log('the budgetInfo', budgetInfo)
     await this.props.updateBudget(budgetId, budgetInfo)
     await this.props.fetchBudgets(this.props.id, 'monthly')
     console.log('Getting updated budgets')

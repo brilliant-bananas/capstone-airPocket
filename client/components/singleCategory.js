@@ -25,9 +25,7 @@ export class SingleCategory extends Component {
   }
 
   render() {
-    console.log('edit state is', this.state.isEdit)
     const {name, id, imageUrl, fetchCategories} = this.props
-    console.log('this is name in singleCategory', name)
     return (
       <div className="category-container">
         <img
@@ -50,7 +48,6 @@ export class SingleCategory extends Component {
             name={name}
             id={id}
             callUpdateAction={this.callUpdateAction}
-            fetchCategories={fetchCategories}
           />
         )}
       </div>

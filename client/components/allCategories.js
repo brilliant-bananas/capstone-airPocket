@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchCategories} from '../store/categories'
-import NewCategory from './createCategory'
 import SingleCategory from './singleCategory'
+import {Link} from 'react-router-dom'
 
 export class AllCategories extends Component {
   constructor(props) {
@@ -18,6 +18,9 @@ export class AllCategories extends Component {
     return (
       <div id="all-categories">
         <h3>Manage Categories</h3>
+        <Link to="/createCategory">
+          <button className="btn btn-success">+</button>
+        </Link>
         {categories.map((category) => (
           <div key={category.id}>
             <SingleCategory
@@ -28,10 +31,6 @@ export class AllCategories extends Component {
             />
           </div>
         ))}
-
-        <div>
-          <NewCategory />
-        </div>
       </div>
     )
   }

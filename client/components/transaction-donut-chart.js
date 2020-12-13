@@ -71,7 +71,6 @@ export default class DonutChart extends React.Component {
       let month = parseInt(dateArr[1])
       return month === monthNum
     })
-    console.log('monthlyTransacts-->', monthlyTransacts)
     const costPerCategory = {}
     for (let i = 0; i < monthlyTransacts.length; i++) {
       let category = monthlyTransacts[i].category.name
@@ -82,7 +81,6 @@ export default class DonutChart extends React.Component {
         costPerCategory[category] = costPerTrans
       }
     }
-    console.log('monthly cost under different categories-->', costPerCategory)
 
     const dataArr = []
     for (let [key, value] of Object.entries(costPerCategory)) {

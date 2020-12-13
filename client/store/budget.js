@@ -3,7 +3,7 @@ import axios from 'axios'
 //action type
 const SET_BUDGETS = 'SET_BUDGETS'
 const ADD_BUDGET = 'ADD_BUDGET'
-const REMOVE_STUDENT = 'REMOVE_BUDGET'
+const REMOVE_BUDGET = 'REMOVE_BUDGET'
 
 //action creator
 export const setBudgets = (budgets) => {
@@ -22,7 +22,7 @@ export const setNewBudget = (newBudget) => {
 export const removedBudget = (budgetId) => {
   return {
     type: REMOVE_BUDGET,
-    studentId,
+    budgetId,
   }
 }
 
@@ -49,13 +49,13 @@ export const postNewBudget = (newBudgetObj) => {
   }
 }
 
-export const deleteStudent = (budgetId) => {
+export const deleteBudget = (budgetId) => {
   return async (dispatch) => {
     try {
       await axios.delete(`api/budgets/${budgetId}`)
       dispatch(removeBudget(budgetId))
     } catch (error) {
-      console.log('Error deleting student')
+      console.log('Error deleting budget')
       // Dispatch our fetchBudgets thunk creator to retrieve all of our budgets from the database again
       dispatch(fetchBudgets())
     }

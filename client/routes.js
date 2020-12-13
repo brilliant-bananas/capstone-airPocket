@@ -8,6 +8,7 @@ import Camera from './components/camera'
 import AllTransactions from './components/allTransactions'
 import Budgets from './components/budgets'
 import AllCategories from './components/allCategories'
+import NewCategory from './components/createCategory'
 
 /**
  * COMPONENT
@@ -35,6 +36,7 @@ class Routes extends Component {
             <Route path="/transactions" component={AllTransactions} />
             <Route path="/budgets" component={Budgets} />
             <Route path="/categories" component={AllCategories} />
+            <Route path="/createCategory" component={NewCategory} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

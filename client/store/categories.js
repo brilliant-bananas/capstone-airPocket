@@ -50,8 +50,7 @@ export const fetchCategories = () => {
 export const updatedSingleCategory = (categoryInfo) => {
   return async (dispatch) => {
     try {
-      const {id, name} = categoryInfo
-      console.log('The category info for updated category:', {name: name})
+      const {id} = categoryInfo
       const {data: updatedCategory} = await axios.put(
         `/api/categories/${id}`,
         categoryInfo

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addCategoryThunk} from '../store/categories'
+import {addCategoryThunk, fetchCategories} from '../store/categories'
 
 class NewCategory extends Component {
   constructor() {
@@ -38,7 +38,7 @@ class NewCategory extends Component {
               placeholder="Category"
               aria-label="Name"
               aria-describedby="basic-addon1"
-              value={this.state.category}
+              value={this.state.name}
               onChange={this.handleChange}
             ></input>
           </div>
@@ -63,6 +63,7 @@ class NewCategory extends Component {
 const mapDispatch = (dispatch) => {
   return {
     addCategoryThunk: (name) => dispatch(addCategoryThunk(name)),
+    fetchCategories: () => dispatch(fetchCategories()),
   }
 }
 
