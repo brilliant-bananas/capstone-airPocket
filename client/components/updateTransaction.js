@@ -22,7 +22,7 @@ class TransForm extends React.Component {
   async handleSubmit(evt) {
     evt.preventDefault()
     await this.props.callUpdateAction(this.props.id, this.state)
-    await this.props.getTransactions()
+    this.props.getTransactions()
   }
 
   render() {

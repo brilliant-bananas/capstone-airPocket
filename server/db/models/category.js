@@ -12,7 +12,7 @@ const Category = db.define('category', {
   imageUrl: {
     type: Sequelize.TEXT,
     defaultValue:
-      'https://www.flaticon.com/svg/static/icons/svg/3163/3163508.svg',
+      'https://www.flaticon.com/svg/static/icons/svg/3081/3081559.svg',
   },
 })
 
