@@ -7,28 +7,15 @@ router.get('/', async (req, res, next) => {
   try {
     const userId = req.user.id
     const transactions = await Transaction.findAll(
-      {include: Category},
-      {order: [['date', 'DESC']]},
       {
         where: {
           userId: userId,
         },
-      }
+      },
+      {include: Category},
+      {order: [['date', 'DESC']]}
     )
     res.json(transactions)
-  } catch (error) {
-    next(error)
-  }
-})
-
-// GET: transactions/:transactionId
-router.get('/:transactionId', async (req, res, next) => {
-  try {
-    const {transactionId} = req.params
-    const transaction = await Transaction.findByPk(transactionId, {
-      include: {model: Category, include: [Transaction]},
-    })
-    res.json(transaction)
   } catch (error) {
     next(error)
   }
