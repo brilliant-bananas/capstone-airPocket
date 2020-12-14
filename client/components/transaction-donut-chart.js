@@ -91,12 +91,15 @@ export default class DonutChart extends React.Component {
 
   componentDidUpdate() {
     let transactions = this.props.transactions
+    const svg = d3.select(this.ref.current)
 
     if (!transactions.length) {
+      svg.attr('visibility', 'hidden')
       return
+    } else {
+      svg.attr('visibility', 'visible')
     }
 
-    const svg = d3.select(this.ref.current)
     const data = this.createPie(this.getMonthlyTotal())
 
     const group = svg.select('g').selectAll('g.arc').data(data)
