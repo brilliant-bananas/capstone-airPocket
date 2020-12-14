@@ -1,16 +1,10 @@
 import axios from 'axios'
 
 //ACTION TYPE
-const SET_SINGLE_TRANSACTION = 'SET_SINGLE_TRANSACTION '
 const UPDATE_TRANSACTION = 'UPDATE_TRANSACTION'
 const DELETE_TRANSACTION = 'DELETE_TRANSACTION'
 
 //ACTION CREATOR
-export const setOneTransaction = (transaction) => ({
-  type: SET_SINGLE_TRANSACTION,
-  transaction,
-})
-
 export const updateTransactionById = (transactionId, updateInfo) => ({
   type: UPDATE_TRANSACTION,
   transactionId,
@@ -22,21 +16,7 @@ export const removeOneTransaction = (transactionId) => ({
   transactionId,
 })
 
-//THUNK
-export const fetchOneTransaction = (transactionId) => {
-  return async (dispatch) => {
-    try {
-      const {data: transaction} = await axios.get(
-        `/api/transactions/${transactionId}`
-      )
-      debugger
-      dispatch(setOneTransaction(transaction))
-    } catch (err) {
-      console.error('Oops, the transaction seems to fail to get loaded', err)
-    }
-  }
-}
-
+//THUNK CREATOR
 export const updateOneTransaction = (transactionId, transactionInfo) => {
   return async (dispatch) => {
     try {
