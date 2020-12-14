@@ -32,10 +32,9 @@ class SingleTransaction extends React.Component {
     })
   }
 
-  callUpdateAction(id, transationInfo) {
-    debugger
+  async callUpdateAction(id, transationInfo) {
     this.renderUpdateForm()
-    this.props.updateTransaction(id, transationInfo)
+    await this.props.updateTransaction(id, transationInfo)
   }
 
   async handleDelete(evt) {

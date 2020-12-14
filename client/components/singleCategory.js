@@ -19,9 +19,9 @@ export class SingleCategory extends Component {
     })
   }
 
-  callUpdateAction(categoryInfo) {
+  async callUpdateAction(categoryInfo) {
     this.renderUpdateForm()
-    this.props.updatedSingleCategory(categoryInfo)
+    await this.props.updatedSingleCategory(categoryInfo)
   }
 
   render() {
@@ -54,6 +54,7 @@ export class SingleCategory extends Component {
               name={name}
               id={id}
               callUpdateAction={this.callUpdateAction}
+              fetchCategories={this.props.fetchCategories}
             />
           </div>
         )}
