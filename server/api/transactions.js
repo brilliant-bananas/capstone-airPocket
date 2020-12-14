@@ -6,15 +6,13 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const userId = req.user.id
-    const transactions = await Transaction.findAll(
-      {
-        where: {
-          userId: userId,
-        },
+    const transactions = await Transaction.findAll({
+      where: {
+        userId: userId,
       },
-      {include: Category},
-      {order: [['date', 'DESC']]}
-    )
+      include: Category,
+      order: [['date', 'DESC']],
+    })
     res.json(transactions)
   } catch (error) {
     next(error)
