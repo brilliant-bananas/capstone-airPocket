@@ -21,7 +21,6 @@ class UserHome extends React.Component {
       ),
     }
   }
-
   async componentDidMount() {
     try {
       await this.props.fetchBudgets(this.props.id, 'monthly')
